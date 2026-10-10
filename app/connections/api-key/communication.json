@@ -1,0 +1,26 @@
+{
+  "url": "https://api.flashdata.dev/v2/api-access",
+  "method": "GET",
+  "headers": {
+    "X-API-Key": "{{parameters.apiKey}}",
+    "Accept": "application/json"
+  },
+  "followRedirect": false,
+  "followAllRedirect": false,
+  "response": {
+    "valid": "{{statusCode === 200}}",
+    "error": {
+      "type": "RuntimeError",
+      "message": "[{{statusCode}}] FlashData could not verify the API key. Check the key and source permissions."
+    },
+    "metadata": {
+      "type": "text",
+      "value": "FlashData API"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.`X-API-Key`"
+    ]
+  }
+}

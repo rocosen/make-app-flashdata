@@ -1,0 +1,29 @@
+{
+  "url": "/v1/queries/realtime",
+  "method": "POST",
+  "type": "json",
+  "body": {
+    "source": "google_search",
+    "query": "{{parameters.query}}",
+    "params": {
+      "num": "{{parameters.limit}}",
+      "page": "{{parameters.page}}",
+      "autocorrect": "{{parameters.autocorrect}}"
+    }
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && body.job.status !== 'failed' && body.results}}",
+      "type": "RuntimeError",
+      "message": "FlashData query outcome is unknown and may already be charged. Check Jobs in the FlashData console before submitting again."
+    },
+    "iterate": "{{get(body.results, '1.organic')}}",
+    "limit": "{{parameters.limit}}",
+    "output": {
+      "result": "{{item}}",
+      "source": "{{body.source}}",
+      "usage": "{{body.usage}}",
+      "raw": "{{body}}"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "name": "query",
+    "type": "text",
+    "label": "Query",
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 2000
+    }
+  },
+  {
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
+    "required": true,
+    "default": 10,
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "help": "Maximum organic results for this page. One execution makes one paid query; fewer results may be available."
+  },
+  {
+    "name": "page",
+    "type": "uinteger",
+    "label": "Page",
+    "required": true,
+    "default": 1,
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "help": "Each page is a separate paid request. Pages are not fetched automatically."
+  },
+  {
+    "name": "autocorrect",
+    "type": "boolean",
+    "label": "Autocorrect",
+    "required": true,
+    "default": true
+  }
+]

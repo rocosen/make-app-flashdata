@@ -1,0 +1,8 @@
+{
+  "name": "flashdata",
+  "label": "FlashData",
+  "description": "Search the web and retrieve video metadata and transcripts through the FlashData API.",
+  "theme": "#367444",
+  "language": "en",
+  "version": "1.0.0"
+}

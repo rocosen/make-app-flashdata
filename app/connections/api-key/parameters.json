@@ -1,0 +1,10 @@
+[
+  {
+    "name": "apiKey",
+    "type": "password",
+    "label": "API Key",
+    "required": true,
+    "editable": true,
+    "help": "Create an API key in your FlashData console. Connection verification does not consume query credits."
+  }
+]

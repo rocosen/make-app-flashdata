@@ -1,0 +1,7 @@
+{
+  "name": "searchWebResults",
+  "label": "Search Web Results",
+  "description": "Search Google web results through FlashData. Each execution queries one page and consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey"
+}
