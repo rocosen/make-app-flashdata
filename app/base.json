@@ -25,6 +25,22 @@
       "429": {
         "type": "RuntimeError",
         "message": "[429] FlashData rate or quota limit reached. Check Jobs before submitting again."
+      },
+      "400": {
+        "type": "RuntimeError",
+        "message": "[400] FlashData rejected the request. Check the source and input parameters."
+      },
+      "404": {
+        "type": "RuntimeError",
+        "message": "[404] FlashData endpoint or resource was not found. Check the request path and resource ID."
+      },
+      "405": {
+        "type": "RuntimeError",
+        "message": "[405] This HTTP method is not supported by the FlashData endpoint."
+      },
+      "422": {
+        "type": "RuntimeError",
+        "message": "[422] FlashData could not validate the request. Check the required inputs and their formats."
       }
     }
   },

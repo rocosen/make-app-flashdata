@@ -1,0 +1,26 @@
+[
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID",
+    "required": true,
+    "validate": {
+      "pattern": "^[A-Za-z0-9_-]{11}$"
+    },
+    "help": "Enter the 11-character YouTube video ID, not the full URL."
+  },
+  {
+    "name": "includeChapters",
+    "type": "boolean",
+    "label": "Include Chapters",
+    "required": true,
+    "default": true
+  },
+  {
+    "name": "includeFormats",
+    "type": "boolean",
+    "label": "Include Formats",
+    "required": true,
+    "default": false
+  }
+]

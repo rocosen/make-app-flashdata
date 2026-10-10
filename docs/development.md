@@ -2,9 +2,9 @@
 
 This source uses Make's native declarative custom-app format. No external runtime, CLI, MCP server or npm package is required to run it on Make.
 
-## Private development app
+## Published app
 
-The development app was created on 2026-10-10 (Asia/Singapore) with internal identifier `flashdata-g6iv9y`, version `1.0.0`, region US2. This identifier is assigned by Make; it differs from the requested name `flashdata`. The app remains private.
+The development app was created on 2026-10-10 (Asia/Singapore) with internal identifier `flashdata-g6iv9y`, version `1.0.0`, region US2. This identifier is assigned by Make; it differs from the requested name `flashdata`. The app was published on 2026-10-10 for [invite-link installation](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d); technical review was requested on the same date and the platform shows `pending approval`. Official approval and directory listing are separate.
 
 Developer editor (owner login required): https://us2.make.com/apps/flashdata-g6iv9y/1/base
 
@@ -12,11 +12,11 @@ The API Key connection was assigned identifier `flashdata-g6iv9y`. Bind modules 
 
 ## Edit through the web UI
 
-1. Open the private app and paste `app/base.json` into Base. Keep Common data empty.
+1. Open the app and paste `app/base.json` into Base. Keep Common data empty.
 2. Create a connection labelled FlashData, type API Key. Paste its `communication.json` and `parameters.json` into their matching tabs. Common data stays empty.
 3. Create a module using its metadata label/type/description; bind the FlashData connection. Paste the communication, static parameters, mappable parameters, interface and samples files into their matching tabs.
 4. Save each tab and verify the save completed before leaving it. A source file on GitHub does not prove the platform saved it.
-5. Add the private module to a manually run scenario. Create a connection with a user-owned FlashData API key. Test the free connection first, then a small paid query.
+5. Add the module to a manually run scenario. Create a connection with a user-owned FlashData API key. Test the free connection first, then a small paid query.
 6. Record scenario IDs, execution results, module version and cost in the private GTM issue. Public evidence must exclude credentials and account data.
 
 No Make management token is needed for this web-editor workflow. The official VS Code extension is an optional future development tool and requires separately configured `sdk-apps:read` and `sdk-apps:write` access.

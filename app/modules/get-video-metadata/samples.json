@@ -1,0 +1,12 @@
+{
+  "result": {
+    "videoId": "dQw4w9WgXcQ",
+    "title": "Example video",
+    "isLive": false
+  },
+  "source": "youtube_metadata",
+  "usage": {
+    "credits": 0.004
+  },
+  "raw": {}
+}

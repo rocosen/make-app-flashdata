@@ -1,0 +1,273 @@
+{
+  "name": "FlashData - Video tools example",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:getVideoMetadata",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "videoId": "dQw4w9WgXcQ",
+        "includeChapters": true,
+        "includeFormats": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "restore": {
+          "expect": {
+            "includeChapters": {
+              "mode": "chose"
+            },
+            "includeFormats": {
+              "mode": "chose"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "videoId",
+            "type": "text",
+            "label": "Video ID",
+            "validate": {
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            },
+            "required": true
+          },
+          {
+            "name": "includeChapters",
+            "type": "boolean",
+            "label": "Include Chapters",
+            "required": true
+          },
+          {
+            "name": "includeFormats",
+            "type": "boolean",
+            "label": "Include Formats",
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "app#flashdata-g6iv9y:getVideoTranscript",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "videoId": "dQw4w9WgXcQ",
+        "language": "en",
+        "auto": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        },
+        "restore": {
+          "expect": {
+            "auto": {
+              "mode": "chose"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "videoId",
+            "type": "text",
+            "label": "Video ID",
+            "validate": {
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            },
+            "required": true
+          },
+          {
+            "name": "language",
+            "type": "text",
+            "label": "Language",
+            "validate": {
+              "pattern": "^[A-Za-z0-9-]{1,35}$"
+            },
+            "required": true
+          },
+          {
+            "name": "auto",
+            "type": "boolean",
+            "label": "Automatically Generated Subtitles",
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "module": "app#flashdata-g6iv9y:makeAnApiCall",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "url": "/v1/queries/realtime",
+        "method": "POST",
+        "body": "{\"source\":\"youtube_metadata\",\"video_id\":\"dQw4w9WgXcQ\",\"params\":{\"include_chapters\":false,\"include_formats\":false}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "restore": {
+          "expect": {
+            "method": {
+              "mode": "chose",
+              "label": "POST"
+            },
+            "qs": {
+              "mode": "chose"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "url",
+            "type": "text",
+            "label": "URL",
+            "validate": {
+              "pattern": "^/[A-Za-z0-9][A-Za-z0-9/_.-]*$"
+            },
+            "required": true
+          },
+          {
+            "name": "method",
+            "type": "select",
+            "label": "Method",
+            "required": true,
+            "validate": {
+              "enum": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          },
+          {
+            "name": "qs",
+            "type": "array",
+            "label": "Query String",
+            "spec": [
+              {
+                "name": "key",
+                "type": "text",
+                "label": "Key"
+              },
+              {
+                "name": "value",
+                "type": "text",
+                "label": "Value"
+              }
+            ]
+          },
+          {
+            "name": "body",
+            "type": "text",
+            "label": "Body"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "module": "app#flashdata-g6iv9y:searchVideos",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "query": "LangGraph",
+        "limit": "2"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        },
+        "restore": {},
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "query",
+            "type": "text",
+            "label": "Query",
+            "validate": {
+              "max": 2000,
+              "min": 1
+            },
+            "required": true
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit",
+            "validate": {
+              "max": 20,
+              "min": 1
+            },
+            "required": true
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

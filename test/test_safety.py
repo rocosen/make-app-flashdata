@@ -42,6 +42,8 @@ class SafetyContract(unittest.TestCase):
             self.assertIsInstance(config, dict)
             self.assertNotIn("repeat", config)
             self.assertNotIn("pagination", config)
+            if file.parent.name == "make-an-api-call":
+                continue
             self.assertEqual(config["url"], "/v1/queries/realtime")
             self.assertEqual(config["method"], "POST")
             self.assertNotIn("headers", config)
@@ -51,6 +53,25 @@ class SafetyContract(unittest.TestCase):
         self.assertEqual(body["params"]["autocorrect"], "{{parameters.autocorrect}}")
         self.assertEqual(body["params"]["num"], "{{parameters.limit}}")
         self.assertEqual(body["params"]["page"], "{{parameters.page}}")
+
+    def test_universal_cannot_send_key_to_a_user_selected_origin(self):
+        config = read("modules/make-an-api-call/communication.json")
+        self.assertEqual(config["url"], "https://data.flashdata.dev/{{parameters.url}}")
+        parameters = read("modules/make-an-api-call/expect.json")
+        import re
+        pattern = parameters[0]["validate"]["pattern"]
+        for value in ["https://evil.example/", "//evil.example/", "/\\evil.example/", "/@evil.example/"]:
+            self.assertIsNone(re.fullmatch(pattern, value))
+        self.assertIsNotNone(re.fullmatch(pattern, "/v1/queries/realtime"))
+        self.assertFalse(any(p["name"] == "headers" for p in parameters))
+
+    def test_video_boolean_inputs_are_forwarded_without_fallback(self):
+        metadata = read("modules/get-video-metadata/communication.json")["body"]["params"]
+        transcript = read("modules/get-video-transcript/communication.json")["body"]["params"]
+        self.assertEqual(metadata["include_formats"], "{{parameters.includeFormats}}")
+        self.assertEqual(metadata["include_chapters"], "{{parameters.includeChapters}}")
+        self.assertEqual(transcript["auto"], "{{parameters.auto}}")
+        self.assertEqual(transcript["language"], "{{parameters.language}}")
 
 
 if __name__ == "__main__":

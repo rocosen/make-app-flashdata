@@ -1,0 +1,12 @@
+{
+  "result": {
+    "videoId": "dQw4w9WgXcQ",
+    "title": "Example video",
+    "channel": "Example channel"
+  },
+  "source": "youtube_search",
+  "usage": {
+    "credits": 0.004
+  },
+  "raw": {}
+}

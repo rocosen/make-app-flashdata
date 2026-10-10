@@ -13,7 +13,7 @@
   },
   "response": {
     "valid": {
-      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && body.job.status !== 'failed' && body.results}}",
+      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && (!body.job || body.job.status !== 'failed') && body.results}}",
       "type": "RuntimeError",
       "message": "FlashData query outcome is unknown and may already be charged. Check Jobs in the FlashData console before submitting again."
     },

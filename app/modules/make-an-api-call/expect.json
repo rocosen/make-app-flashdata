@@ -1,0 +1,64 @@
+[
+  {
+    "name": "url",
+    "type": "text",
+    "label": "URL",
+    "required": true,
+    "validate": {
+      "pattern": "^/[A-Za-z0-9][A-Za-z0-9/_.-]*$"
+    },
+    "help": "Enter a path relative to https://data.flashdata.dev, for example /v1/queries/realtime. Use Query String for query parameters. Credentials are provided by the connection."
+  },
+  {
+    "name": "method",
+    "type": "select",
+    "label": "Method",
+    "required": true,
+    "default": "GET",
+    "options": [
+      {
+        "label": "GET",
+        "value": "GET"
+      },
+      {
+        "label": "POST",
+        "value": "POST"
+      },
+      {
+        "label": "PUT",
+        "value": "PUT"
+      },
+      {
+        "label": "PATCH",
+        "value": "PATCH"
+      },
+      {
+        "label": "DELETE",
+        "value": "DELETE"
+      }
+    ]
+  },
+  {
+    "name": "qs",
+    "type": "array",
+    "label": "Query String",
+    "spec": [
+      {
+        "name": "key",
+        "type": "text",
+        "label": "Key"
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "label": "Value"
+      }
+    ]
+  },
+  {
+    "name": "body",
+    "type": "text",
+    "label": "Body",
+    "help": "Raw JSON request body. POST /v1/queries/realtime consumes FlashData credits. Check Jobs before retrying an uncertain request."
+  }
+]

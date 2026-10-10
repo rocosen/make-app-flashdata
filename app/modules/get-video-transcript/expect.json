@@ -1,0 +1,31 @@
+[
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID",
+    "required": true,
+    "validate": {
+      "pattern": "^[A-Za-z0-9_-]{11}$"
+    },
+    "help": "Enter the 11-character YouTube video ID, not the full URL."
+  },
+  {
+    "name": "language",
+    "type": "text",
+    "label": "Language",
+    "required": true,
+    "default": "en",
+    "validate": {
+      "pattern": "^[A-Za-z0-9-]{1,35}$"
+    },
+    "help": "Exact requested language code. No automatic language fallback."
+  },
+  {
+    "name": "auto",
+    "type": "boolean",
+    "label": "Automatically Generated Subtitles",
+    "required": true,
+    "default": false,
+    "help": "Yes requests automatic subtitles; No requests manual subtitles. The module does not switch types if unavailable."
+  }
+]

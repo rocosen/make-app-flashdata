@@ -1,0 +1,24 @@
+[
+  {
+    "name": "query",
+    "type": "text",
+    "label": "Query",
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 2000
+    }
+  },
+  {
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
+    "required": true,
+    "default": 5,
+    "validate": {
+      "min": 1,
+      "max": 20
+    },
+    "help": "Maximum videos returned by one paid query. No automatic pagination."
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "name": "searchVideos",
+  "label": "Search Videos",
+  "description": "Search YouTube videos through FlashData. One execution makes one paid query.",
+  "type": "search",
+  "connection": "apiKey"
+}

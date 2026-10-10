@@ -1,0 +1,26 @@
+{
+  "url": "/v1/queries/realtime",
+  "method": "POST",
+  "type": "json",
+  "body": {
+    "source": "youtube_metadata",
+    "video_id": "{{parameters.videoId}}",
+    "params": {
+      "include_chapters": "{{parameters.includeChapters}}",
+      "include_formats": "{{parameters.includeFormats}}"
+    }
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && (!body.job || body.job.status !== 'failed') && body.results}}",
+      "type": "RuntimeError",
+      "message": "FlashData query outcome is unknown and may already be charged. Check Jobs in the FlashData console before submitting again."
+    },
+    "output": {
+      "result": "{{get(body.results, '1')}}",
+      "source": "{{body.source}}",
+      "usage": "{{body.usage}}",
+      "raw": "{{body}}"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "url": "https://data.flashdata.dev/{{parameters.url}}",
+  "method": "{{parameters.method}}",
+  "type": "text",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "qs": {
+    "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
+  },
+  "body": "{{parameters.body}}",
+  "response": {
+    "output": {
+      "body": "{{body}}",
+      "headers": "{{headers}}",
+      "statusCode": "{{statusCode}}"
+    }
+  }
+}
