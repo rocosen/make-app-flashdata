@@ -1,0 +1,89 @@
+[
+  {
+    "name": "channelId",
+    "type": "text",
+    "label": "Channel ID"
+  },
+  {
+    "name": "channelHandle",
+    "type": "text",
+    "label": "Handle"
+  },
+  {
+    "name": "name",
+    "type": "text",
+    "label": "Name"
+  },
+  {
+    "name": "description",
+    "type": "text",
+    "label": "Description"
+  },
+  {
+    "name": "subscriberCount",
+    "type": "number",
+    "label": "Subscribers"
+  },
+  {
+    "name": "videoCount",
+    "type": "number",
+    "label": "Total videos"
+  },
+  {
+    "name": "viewCount",
+    "type": "number",
+    "label": "Views"
+  },
+  {
+    "name": "avatarUrl",
+    "type": "url",
+    "label": "Avatar URL"
+  },
+  {
+    "name": "bannerUrl",
+    "type": "url",
+    "label": "Banner URL"
+  },
+  {
+    "name": "channelUrl",
+    "type": "url",
+    "label": "Channel URL"
+  },
+  {
+    "name": "videos",
+    "type": "array",
+    "label": "Recent videos",
+    "spec": [
+      {
+        "name": "videoId",
+        "type": "text",
+        "label": "Video ID"
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Title"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "label": "Duration (seconds)"
+      },
+      {
+        "name": "viewCount",
+        "type": "number",
+        "label": "Views"
+      },
+      {
+        "name": "uploadDate",
+        "type": "text",
+        "label": "Upload date (ISO text)"
+      },
+      {
+        "name": "thumbnail",
+        "type": "url",
+        "label": "Thumbnail URL"
+      }
+    ]
+  }
+]

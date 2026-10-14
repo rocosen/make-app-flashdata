@@ -1,0 +1,8 @@
+{
+  "name": "searchWebVideos",
+  "label": "Search web videos",
+  "description": "Searches Google Videos across websites, returning video links, titles, durations and publishers. Each page consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "Google search"
+}

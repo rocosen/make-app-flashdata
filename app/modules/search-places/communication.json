@@ -1,0 +1,44 @@
+{
+  "url": "/v1/queries/realtime",
+  "method": "POST",
+  "type": "json",
+  "body": {
+    "source": "google_places",
+    "query": "{{parameters.query}}",
+    "params": {
+      "gl": "{{parameters.gl}}",
+      "hl": "{{parameters.hl}}",
+      "location": "{{parameters.location}}",
+      "tbs": "{{parameters.tbs}}",
+      "autocorrect": "{{parameters.autocorrect}}",
+      "num": 100,
+      "page": 1
+    }
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && (!body.job || body.job.status !== 'failed') && body.results}}",
+      "type": "RuntimeError",
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}} For an uncertain query, inspect Jobs before submitting again."
+    },
+    "output": "{{item}}",
+    "iterate": "{{get(body.results, '1.places')}}",
+    "limit": "{{parameters.limit}}"
+  },
+  "pagination": {
+    "body": {
+      "source": "google_places",
+      "query": "{{parameters.query}}",
+      "params": {
+        "gl": "{{parameters.gl}}",
+        "hl": "{{parameters.hl}}",
+        "location": "{{parameters.location}}",
+        "tbs": "{{parameters.tbs}}",
+        "autocorrect": "{{parameters.autocorrect}}",
+        "num": 100,
+        "page": "{{pagination.page}}"
+      }
+    },
+    "condition": "{{pagination.page <= ifempty(parameters.maxPages, 1)}}"
+  }
+}

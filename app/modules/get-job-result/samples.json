@@ -1,0 +1,12 @@
+{
+  "source": "youtube_download",
+  "status": "done",
+  "results": [
+    {
+      "file_url": "https://example.com/customer-storage/video.mp4",
+      "file_size": 1024,
+      "downloaded_bytes": 1024,
+      "md5": "illustrative"
+    }
+  ]
+}

@@ -17,15 +17,14 @@
     "default": "en",
     "validate": {
       "pattern": "^[A-Za-z0-9-]{1,35}$"
-    },
-    "help": "Exact requested language code. No automatic language fallback."
+    }
   },
   {
     "name": "auto",
     "type": "boolean",
-    "label": "Automatically Generated Subtitles",
+    "label": "Automatically generated captions",
     "required": true,
-    "default": false,
-    "help": "Yes requests automatic subtitles; No requests manual subtitles. The module does not switch types if unavailable."
+    "default": true,
+    "help": "Yes selects automatic captions; No selects uploader-provided captions. The exact language and source must exist. No fallback, transcription or translation is performed."
   }
 ]

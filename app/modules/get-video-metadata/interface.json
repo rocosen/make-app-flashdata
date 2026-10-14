@@ -1,141 +1,117 @@
 [
   {
-    "name": "result",
-    "type": "collection",
-    "label": "Result",
-    "spec": [
-      {
-        "name": "videoId",
-        "type": "text",
-        "label": "Video ID"
-      },
-      {
-        "name": "title",
-        "type": "text",
-        "label": "Title"
-      },
-      {
-        "name": "channel",
-        "type": "text",
-        "label": "Channel"
-      },
-      {
-        "name": "channelId",
-        "type": "text",
-        "label": "Channel ID"
-      },
-      {
-        "name": "channelUrl",
-        "type": "url",
-        "label": "Channel URL"
-      },
-      {
-        "name": "duration",
-        "type": "number",
-        "label": "Duration (seconds)"
-      },
-      {
-        "name": "durationString",
-        "type": "text",
-        "label": "Duration"
-      },
-      {
-        "name": "viewCount",
-        "type": "number",
-        "label": "Views"
-      },
-      {
-        "name": "uploadDate",
-        "type": "text",
-        "label": "Upload Date (source text)"
-      },
-      {
-        "name": "description",
-        "type": "text",
-        "label": "Description"
-      },
-      {
-        "name": "thumbnails",
-        "type": "array",
-        "label": "Thumbnails"
-      },
-      {
-        "name": "channelSubscriberCount",
-        "type": "number",
-        "label": "Channel Subscribers"
-      },
-      {
-        "name": "likeCount",
-        "type": "number",
-        "label": "Likes"
-      },
-      {
-        "name": "commentCount",
-        "type": "number",
-        "label": "Comments"
-      },
-      {
-        "name": "categories",
-        "type": "array",
-        "label": "Categories"
-      },
-      {
-        "name": "tags",
-        "type": "array",
-        "label": "Tags"
-      },
-      {
-        "name": "ageLimit",
-        "type": "number",
-        "label": "Age Limit"
-      },
-      {
-        "name": "isLive",
-        "type": "boolean",
-        "label": "Is Live"
-      },
-      {
-        "name": "wasLive",
-        "type": "boolean",
-        "label": "Was Live"
-      },
-      {
-        "name": "hasTranscripts",
-        "type": "boolean",
-        "label": "Has Transcripts"
-      },
-      {
-        "name": "transcriptLanguages",
-        "type": "array",
-        "label": "Transcript Languages"
-      },
-      {
-        "name": "formats",
-        "type": "array",
-        "label": "Formats"
-      },
-      {
-        "name": "chapters",
-        "type": "array",
-        "label": "Chapters"
-      }
-    ]
-  },
-  {
-    "name": "source",
+    "name": "videoId",
     "type": "text",
-    "label": "Source"
+    "label": "Video ID"
   },
   {
-    "name": "usage",
-    "type": "collection",
-    "label": "Query Usage",
-    "spec": []
+    "name": "title",
+    "type": "text",
+    "label": "Title"
   },
   {
-    "name": "raw",
-    "type": "collection",
-    "label": "Raw Response",
-    "spec": []
+    "name": "channel",
+    "type": "text",
+    "label": "Channel"
+  },
+  {
+    "name": "channelId",
+    "type": "text",
+    "label": "Channel ID"
+  },
+  {
+    "name": "channelUrl",
+    "type": "url",
+    "label": "Channel URL"
+  },
+  {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration (seconds)"
+  },
+  {
+    "name": "durationString",
+    "type": "text",
+    "label": "Duration"
+  },
+  {
+    "name": "viewCount",
+    "type": "number",
+    "label": "Views"
+  },
+  {
+    "name": "uploadDate",
+    "type": "date",
+    "label": "Upload date"
+  },
+  {
+    "name": "description",
+    "type": "text",
+    "label": "Description"
+  },
+  {
+    "name": "thumbnails",
+    "type": "array",
+    "label": "Thumbnails"
+  },
+  {
+    "name": "channelSubscriberCount",
+    "type": "number",
+    "label": "Channel subscribers"
+  },
+  {
+    "name": "likeCount",
+    "type": "number",
+    "label": "Likes"
+  },
+  {
+    "name": "commentCount",
+    "type": "number",
+    "label": "Comments"
+  },
+  {
+    "name": "categories",
+    "type": "array",
+    "label": "Categories"
+  },
+  {
+    "name": "tags",
+    "type": "array",
+    "label": "Tags"
+  },
+  {
+    "name": "ageLimit",
+    "type": "number",
+    "label": "Age limit"
+  },
+  {
+    "name": "isLive",
+    "type": "boolean",
+    "label": "Is live"
+  },
+  {
+    "name": "wasLive",
+    "type": "boolean",
+    "label": "Was live"
+  },
+  {
+    "name": "hasTranscripts",
+    "type": "boolean",
+    "label": "Has transcripts"
+  },
+  {
+    "name": "transcriptLanguages",
+    "type": "array",
+    "label": "Transcript languages"
+  },
+  {
+    "name": "formats",
+    "type": "array",
+    "label": "Formats"
+  },
+  {
+    "name": "chapters",
+    "type": "array",
+    "label": "Chapters"
   }
 ]

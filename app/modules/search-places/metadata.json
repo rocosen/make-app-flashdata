@@ -1,0 +1,8 @@
+{
+  "name": "searchPlaces",
+  "label": "Search places",
+  "description": "Searches Google Places for businesses with addresses, coordinates, ratings and available contact details. Each page consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "Google search"
+}

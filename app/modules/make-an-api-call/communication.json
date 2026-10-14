@@ -1,9 +1,10 @@
 {
-  "url": "https://data.flashdata.dev/{{parameters.url}}",
+  "url": "{{parameters.api === 'management' ? 'https://api.flashdata.dev' : 'https://data.flashdata.dev'}}/{{parameters.url}}",
   "method": "{{parameters.method}}",
   "type": "text",
   "headers": {
-    "Content-Type": "application/json"
+    "{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}",
+    "x-api-key": "{{connection.apiKey}}"
   },
   "qs": {
     "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
@@ -15,5 +16,12 @@
       "headers": "{{headers}}",
       "statusCode": "{{statusCode}}"
     }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers",
+      "request.body",
+      "response.headers.location"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 {
   "baseUrl": "https://data.flashdata.dev",
   "headers": {
-    "X-API-Key": "{{connection.apiKey}}",
+    "x-api-key": "{{connection.apiKey}}",
     "Accept": "application/json"
   },
   "followRedirect": false,
@@ -9,44 +9,12 @@
   "response": {
     "error": {
       "type": "RuntimeError",
-      "message": "[{{statusCode}}] FlashData query outcome is unknown and may already be charged. Check Jobs in the FlashData console before submitting again.",
-      "401": {
-        "type": "RuntimeError",
-        "message": "[401] FlashData rejected the API key. Check your connection."
-      },
-      "402": {
-        "type": "RuntimeError",
-        "message": "[402] Insufficient FlashData credits. Add credits in the FlashData console."
-      },
-      "403": {
-        "type": "RuntimeError",
-        "message": "[403] This account or API key cannot access the requested source."
-      },
-      "429": {
-        "type": "RuntimeError",
-        "message": "[429] FlashData rate or quota limit reached. Check Jobs before submitting again."
-      },
-      "400": {
-        "type": "RuntimeError",
-        "message": "[400] FlashData rejected the request. Check the source and input parameters."
-      },
-      "404": {
-        "type": "RuntimeError",
-        "message": "[404] FlashData endpoint or resource was not found. Check the request path and resource ID."
-      },
-      "405": {
-        "type": "RuntimeError",
-        "message": "[405] This HTTP method is not supported by the FlashData endpoint."
-      },
-      "422": {
-        "type": "RuntimeError",
-        "message": "[422] FlashData could not validate the request. Check the required inputs and their formats."
-      }
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}}"
     }
   },
   "log": {
     "sanitize": [
-      "request.headers.`X-API-Key`"
+      "request.headers.x-api-key"
     ]
   }
 }

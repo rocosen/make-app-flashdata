@@ -1,0 +1,8 @@
+{
+  "name": "searchNews",
+  "label": "Search news",
+  "description": "Searches Google News for headlines, publication names, article links and publication dates. Each page consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "Google search"
+}

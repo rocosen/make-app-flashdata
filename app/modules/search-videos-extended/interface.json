@@ -1,0 +1,57 @@
+[
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID"
+  },
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Title"
+  },
+  {
+    "name": "channel",
+    "type": "text",
+    "label": "Channel"
+  },
+  {
+    "name": "channelId",
+    "type": "text",
+    "label": "Channel ID"
+  },
+  {
+    "name": "channelUrl",
+    "type": "url",
+    "label": "Channel URL"
+  },
+  {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration (seconds)"
+  },
+  {
+    "name": "durationString",
+    "type": "text",
+    "label": "Duration"
+  },
+  {
+    "name": "viewCount",
+    "type": "number",
+    "label": "Views"
+  },
+  {
+    "name": "uploadDate",
+    "type": "date",
+    "label": "Upload date"
+  },
+  {
+    "name": "description",
+    "type": "text",
+    "label": "Description"
+  },
+  {
+    "name": "thumbnails",
+    "type": "array",
+    "label": "Thumbnails"
+  }
+]

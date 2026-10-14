@@ -1,5 +1,7 @@
 # Platform validation
 
+**Current correction (2026-10-14):** The vendor form was submitted on 2026-10-11. Make posted Changes required that day; the previous statement that the form was unsubmitted is historical and superseded. Fifteen business modules, two job readers and a universal module are now saved in the Make editor, with 15 private task-template drafts. Ten offline tests pass; the new definitions have not yet received complete live validation. See [review update](review-update.md).
+
 Recorded 2026-10-10 (Asia/Singapore), Make US2 app 1.0.0. All scenarios are manual and inactive. Private scenario/account identifiers and screenshots are kept in the internal GTM workspace.
 
 | Component | Verified result |
@@ -18,4 +20,4 @@ Seven local safety checks pass. They do not execute Make IML. A live zero-result
 
 ## Publication and review
 
-On 2026-10-10, Make confirmed app 1.0.0 as published for invite-link installation, then `pending approval` / `Review process started` after submission of the API documentation and all five module scenario links plus the HTTP error scenario. This confirms the initial review request, not review completion or catalogue listing. Make acknowledged receipt by email and requires a supplementary vendor form before review can proceed; that form is prepared but not yet submitted.
+On 2026-10-10, Make confirmed app 1.0.0 as published for invite-link installation, then `pending approval` / `Review process started` after submission of the API documentation and all five module scenario links plus the HTTP error scenario. This confirms the initial review request, not review completion or catalogue listing. Make acknowledged receipt by email and requires a supplementary vendor form before review can proceed; the form was subsequently submitted on 2026-10-11. Make then requested changes; see the current correction above.

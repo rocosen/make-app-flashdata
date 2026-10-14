@@ -1,0 +1,67 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Job ID"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Source"
+  },
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Status"
+  },
+  {
+    "name": "error",
+    "type": "text",
+    "label": "Error"
+  },
+  {
+    "name": "progress",
+    "type": "number",
+    "label": "Progress"
+  },
+  {
+    "name": "credits",
+    "type": "number",
+    "label": "Credits"
+  },
+  {
+    "name": "createdAt",
+    "type": "date",
+    "label": "Created at"
+  },
+  {
+    "name": "updatedAt",
+    "type": "date",
+    "label": "Updated at"
+  },
+  {
+    "name": "durationMs",
+    "type": "number",
+    "label": "Duration (milliseconds)"
+  },
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID"
+  },
+  {
+    "name": "params",
+    "type": "collection",
+    "label": "Submitted settings"
+  },
+  {
+    "name": "result",
+    "type": "collection",
+    "label": "Result metadata"
+  },
+  {
+    "name": "links",
+    "type": "array",
+    "label": "Job links"
+  }
+]

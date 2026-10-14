@@ -1,46 +1,22 @@
 [
   {
-    "name": "result",
-    "type": "collection",
-    "label": "Result",
-    "spec": [
-      {
-        "name": "title",
-        "type": "text",
-        "label": "Title"
-      },
-      {
-        "name": "link",
-        "type": "url",
-        "label": "URL"
-      },
-      {
-        "name": "snippet",
-        "type": "text",
-        "label": "Snippet"
-      },
-      {
-        "name": "position",
-        "type": "uinteger",
-        "label": "Position"
-      }
-    ]
-  },
-  {
-    "name": "source",
+    "name": "title",
     "type": "text",
-    "label": "Source"
+    "label": "Title"
   },
   {
-    "name": "usage",
-    "type": "collection",
-    "label": "Query Usage",
-    "spec": []
+    "name": "link",
+    "type": "url",
+    "label": "URL"
   },
   {
-    "name": "raw",
-    "type": "collection",
-    "label": "Raw Response",
-    "spec": []
+    "name": "snippet",
+    "type": "text",
+    "label": "Snippet"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
   }
 ]

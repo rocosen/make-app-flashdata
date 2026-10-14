@@ -1,7 +1,9 @@
 {
   "name": "getVideoMetadata",
-  "label": "Get Video Metadata",
-  "description": "Retrieve YouTube video details through FlashData. Consumes FlashData credits.",
+  "label": "Get video metadata",
+  "description": "Retrieves YouTube video details, statistics, available formats and chapters. Consumes FlashData credits.",
   "type": "action",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "read"
 }

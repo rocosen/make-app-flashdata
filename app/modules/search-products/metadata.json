@@ -1,0 +1,8 @@
+{
+  "name": "searchProducts",
+  "label": "Search products",
+  "description": "Searches Google Shopping for product listings with formatted prices, merchants, ratings and links. Each page consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "Google search"
+}

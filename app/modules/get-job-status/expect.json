@@ -1,0 +1,12 @@
+[
+  {
+    "name": "jobId",
+    "type": "text",
+    "label": "Job ID",
+    "required": true,
+    "validate": {
+      "pattern": "^job_[A-Za-z0-9_-]{1,116}$"
+    },
+    "help": "Use the ID from the original submission. Reading does not submit a new query."
+  }
+]

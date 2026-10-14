@@ -1,0 +1,108 @@
+{
+  "name": "Read an existing FlashData download job",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:getJobStatus",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "jobId": ""
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "jobId",
+            "type": "text",
+            "label": "Job ID",
+            "required": true,
+            "validate": {
+              "pattern": "^job_[A-Za-z0-9_-]{1,116}$"
+            },
+            "help": "Use the ID from the original submission. Reading does not submit a new query."
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "app#flashdata-g6iv9y:getJobResult",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "jobId": "{{1.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "jobId",
+            "type": "text",
+            "label": "Job ID",
+            "required": true,
+            "validate": {
+              "pattern": "^job_[A-Za-z0-9_-]{1,116}$"
+            },
+            "help": "Use the ID from the original submission. Reading does not submit a new query."
+          }
+        ]
+      },
+      "filter": {
+        "name": "Read only completed jobs",
+        "conditions": [
+          [
+            {
+              "a": "{{1.status}}",
+              "b": "completed",
+              "o": "text:equal"
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": true,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

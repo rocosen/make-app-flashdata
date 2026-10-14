@@ -1,0 +1,52 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Product"
+  },
+  {
+    "name": "link",
+    "type": "url",
+    "label": "Product URL"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Merchant"
+  },
+  {
+    "name": "price",
+    "type": "text",
+    "label": "Displayed price"
+  },
+  {
+    "name": "delivery",
+    "type": "text",
+    "label": "Delivery"
+  },
+  {
+    "name": "rating",
+    "type": "number",
+    "label": "Rating"
+  },
+  {
+    "name": "ratingCount",
+    "type": "uinteger",
+    "label": "Rating count"
+  },
+  {
+    "name": "imageUrl",
+    "type": "url",
+    "label": "Image URL"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
+  },
+  {
+    "name": "productId",
+    "type": "text",
+    "label": "Product ID"
+  }
+]

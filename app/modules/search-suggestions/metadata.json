@@ -1,0 +1,8 @@
+{
+  "name": "searchSuggestions",
+  "label": "Search suggestions",
+  "description": "Retrieves YouTube autocomplete phrases for a search prefix, language and region. Does not measure search volume. Consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "YouTube"
+}

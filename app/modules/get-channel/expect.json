@@ -1,0 +1,24 @@
+[
+  {
+    "name": "handle",
+    "type": "text",
+    "label": "Channel handle",
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "required": true,
+    "help": "For example @jawed. The @ prefix is optional."
+  },
+  {
+    "name": "videoLimit",
+    "type": "uinteger",
+    "label": "Recent video limit",
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "required": true,
+    "default": 20
+  }
+]

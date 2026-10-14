@@ -1,29 +1,42 @@
 # FlashData
 
-Search Google web results and retrieve YouTube video search results, metadata and transcripts using the FlashData API.
+Use Google Search, News, Images, Shopping, Videos and Places, or YouTube Search, Extended Search, Metadata, Transcript, Captions, License Metadata, Channel, Suggestions and Download in Make.
 
-## Connect your account
+## Setup and cost
 
-1. Create an account at https://flashdata.dev and create a FlashData API key with access to the sources you need.
-2. Add a FlashData module to your Make scenario, select Add under Connection, and enter your API key.
-3. The connection uses the free API access endpoint to verify the key. Keep the key private.
+Create an API key at https://flashdata.dev/app/api-keys, grant the required source and select a FlashData connection. Verification is free of FlashData query charges. The integration and templates are free to install; FlashData API calls are paid. Make and storage-provider charges are separate. Prices: https://flashdata.dev/pricing
 
-API documentation: https://flashdata.dev/docs/api-reference
+## Choose a task
 
-## Modules
+- **Search web results**: https://flashdata.dev/docs/sources/google_search
+- **Search news**: https://flashdata.dev/docs/sources/google_news
+- **Search images**: https://flashdata.dev/docs/sources/google_images
+- **Search products**: https://flashdata.dev/docs/sources/google_shopping
+- **Search web videos**: https://flashdata.dev/docs/sources/google_videos
+- **Search places**: https://flashdata.dev/docs/sources/google_places
+- **Search videos**: https://flashdata.dev/docs/sources/youtube_search
+- **Search videos (extended)**: https://flashdata.dev/docs/sources/youtube_search_extended
+- **Get video metadata**: https://flashdata.dev/docs/sources/youtube_metadata
+- **Get a video transcript**: https://flashdata.dev/docs/sources/youtube_transcript
+- **Get video captions**: https://flashdata.dev/docs/sources/youtube_captions
+- **Get video license metadata**: https://flashdata.dev/docs/sources/youtube_trainability
+- **Get a channel**: https://flashdata.dev/docs/sources/youtube_channel
+- **Search suggestions**: https://flashdata.dev/docs/sources/youtube_suggestions
+- **Download a video**: https://flashdata.dev/docs/sources/youtube_download
 
-- Search Web Results: enter a query, limit and page. Each organic result is a separate bundle. Page changes make a separate request; pages are not fetched automatically.
-- Search Videos: enter a query and limit. Each video is a separate bundle.
-- Get Video Metadata: enter an 11-character video ID and choose whether to include chapters and formats.
-- Get Video Transcript: enter a video ID, language and automatic/manual subtitle choice. Missing subtitles do not trigger a fallback query.
-- Make an API call: use a relative path on data.flashdata.dev, an HTTP method and, where required, a JSON body. The app adds authentication; arbitrary external URLs are not accepted.
+Each search returns a separate bundle per result. Keep paid downstream operations out of unintended fan-out. Google searches default to at most one paid page; raise Maximum paid pages explicitly to allow further pages. Limit defaults to 10; fewer results may exist.
 
-## Costs and troubleshooting
+Transcript defaults to automatic captions; Captions defaults to uploader tracks. No caption-source fallback or translation occurs. License Metadata reads a Creative Commons label, not creator training permission.
 
-Queries consume FlashData credits. Make credits are billed separately. Start with Run once and a small result limit. Each output bundle repeats the usage of the same query; do not sum those values across bundles. Paid modules after a search execute once per returned bundle.
+Download requires your own writable storage. Submission returns a job ID. Read status until completed, then retrieve the existing result; do not submit again to check progress. Completed JSON describes the file in your storage. Credentials must stay out of public templates.
 
-If a query fails or its outcome is uncertain, inspect Jobs in the FlashData console before running it again. Do not add automatic retries unless you accept possible duplicate charges. A 401 error indicates an invalid key; 402 indicates insufficient credits; 404 indicates an unknown path or resource.
+## Utilities
 
-Source and examples: https://github.com/flashdata-dev/make-app-flashdata
+Get a job status and Get a job result read existing work without creating another paid query. Make an API call selects either the fixed Data or Management API origin. Use Management API with /v2/api-access for a harmless access check. Authorization comes from the connection; arbitrary external URLs are rejected.
 
-This app uses FlashData's API and does not imply endorsement by Google or YouTube.
+Errors retain the API status and explanation. Paid submissions are not automatically retried by these module definitions. After a timeout, inspect Jobs before running again. Current outputs are direct fields; remap older result.field paths to field and remove uses of raw.
+
+Documentation: https://flashdata.dev/docs/api-reference
+Source and task blueprints: https://github.com/flashdata-dev/make-app-flashdata
+
+This integration does not imply endorsement by Google or YouTube.

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Title"
+  },
+  {
+    "name": "link",
+    "type": "url",
+    "label": "Video page URL"
+  },
+  {
+    "name": "snippet",
+    "type": "text",
+    "label": "Description"
+  },
+  {
+    "name": "duration",
+    "type": "text",
+    "label": "Duration (source text)"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Source"
+  },
+  {
+    "name": "channel",
+    "type": "text",
+    "label": "Publisher"
+  },
+  {
+    "name": "date",
+    "type": "text",
+    "label": "Publication date (source text)"
+  },
+  {
+    "name": "imageUrl",
+    "type": "url",
+    "label": "Thumbnail URL"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
+  },
+  {
+    "name": "videoUrl",
+    "type": "url",
+    "label": "Video URL"
+  }
+]

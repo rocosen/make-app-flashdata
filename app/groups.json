@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Google search",
+    "modules": ["searchWebResults", "searchNews", "searchImages", "searchProducts", "searchWebVideos", "searchPlaces"]
+  },
+  {
+    "label": "YouTube",
+    "modules": ["searchVideos", "searchVideosExtended", "getVideoMetadata", "getVideoTranscript", "getVideoCaptions", "getVideoLicense", "getChannel", "searchSuggestions", "downloadVideo"]
+  },
+  {
+    "label": "Jobs",
+    "modules": ["getJobStatus", "getJobResult"]
+  },
+  {
+    "label": "Other",
+    "modules": ["makeAnApiCall"]
+  }
+]

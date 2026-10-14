@@ -1,0 +1,84 @@
+[
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Source"
+  },
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Status"
+  },
+  {
+    "name": "results",
+    "type": "array",
+    "label": "Results",
+    "spec": [
+      {
+        "name": "file_url",
+        "type": "url",
+        "label": "Delivered file URL"
+      },
+      {
+        "name": "file_size",
+        "type": "number",
+        "label": "File size (bytes)"
+      },
+      {
+        "name": "downloaded_bytes",
+        "type": "number",
+        "label": "Billed bytes"
+      },
+      {
+        "name": "md5",
+        "type": "text",
+        "label": "MD5"
+      },
+      {
+        "name": "resolution",
+        "type": "text",
+        "label": "Resolution"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "label": "Duration (seconds)"
+      },
+      {
+        "name": "output_format",
+        "type": "text",
+        "label": "Output format"
+      },
+      {
+        "name": "fps",
+        "type": "number",
+        "label": "Frame rate"
+      },
+      {
+        "name": "video_codec",
+        "type": "text",
+        "label": "Video codec"
+      },
+      {
+        "name": "audio_codec",
+        "type": "text",
+        "label": "Audio codec"
+      },
+      {
+        "name": "dynamic_range",
+        "type": "text",
+        "label": "Dynamic range"
+      },
+      {
+        "name": "metadata",
+        "type": "collection",
+        "label": "Metadata file"
+      }
+    ]
+  },
+  {
+    "name": "usage",
+    "type": "collection",
+    "label": "Usage"
+  }
+]
