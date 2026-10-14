@@ -1,5 +1,5 @@
 {
-  "url": "{{parameters.api === 'management' ? 'https://api.flashdata.dev' : 'https://data.flashdata.dev'}}/{{parameters.url}}",
+  "url": "{{if(parameters.api === 'management', 'https://api.flashdata.dev', 'https://data.flashdata.dev')}}{{parameters.url}}",
   "method": "{{parameters.method}}",
   "type": "text",
   "headers": {
@@ -23,5 +23,7 @@
       "request.body",
       "response.headers.location"
     ]
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }

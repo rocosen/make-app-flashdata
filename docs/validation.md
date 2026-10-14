@@ -1,6 +1,16 @@
 # Platform validation
 
-**Current correction (2026-10-14):** The vendor form was submitted on 2026-10-11. Make posted Changes required that day; the previous statement that the form was unsubmitted is historical and superseded. Fifteen business modules, two job readers and a universal module are now saved in the Make editor, with 15 private task-template drafts. Ten offline tests pass; the new definitions have not yet received complete live validation. See [review update](review-update.md).
+**Current validation (2026-10-14):** Fourteen of fifteen business sources passed live Make execution; `youtube_download` and customer storage writes were not executed. All six Google modules passed bounded two-page execution after fixing the final no-body validation check. Zero-result search emitted no bundles and made one paid request. Metadata dates, search null dates, separate automatic/manual captions, Management-domain selection, asynchronous metadata submission and the expected 404 path were verified. Job status passed; result retrieval did not.
+
+The authorized limit was 1 FlashData credit and 50 Make credits using existing balances. The complete internal ledger records 39 Make runs, 44 Make credits and 39 paid API requests costing 0.296 FlashData credit, including failed diagnostic runs. No model call or customer media storage write occurred. One asynchronous metadata query created its ordinary FlashData JSON result artifact. All scenarios remain manual/inactive.
+
+Make IML does not support the JavaScript ternary expressions or `startsWith` used in the earlier definitions. These were replaced with documented `if`, `substring` and `length`. Google pagination accepts an absent response body at the platform's termination step. Domain selection no longer embeds the whole ternary text in the URL.
+
+**Result reader blocker:** Even with static `followRedirect: false` and `followAllRedirect: false` saved on every request, the result-link request returned HTTP 200 with R2 response headers in Make DevTool instead of exposing 302. We cannot verify whether the earlier automatic hop forwarded the API key. The reader now deliberately fails after free api-access verification, before requesting the redirect endpoint. A final run and DevTool trace confirmed only that access request. This is a verified guard, not a successful result read. The Universal input rejects results paths. See [redirect blocker](redirect-blocker.md).
+
+Ten offline safety checks pass. They check definitions, explicit per-request flags, bounded billing and the current guard; they do not prove Make honors redirect flags. Public templates and template approval submissions remain 0/15. The app review still has Changes required; Update review was enabled on the final settled page, but no update was submitted with missing successful module evidence.
+
+## Historical execution — 2026-10-10
 
 Recorded 2026-10-10 (Asia/Singapore), Make US2 app 1.0.0. All scenarios are manual and inactive. Private scenario/account identifiers and screenshots are kept in the internal GTM workspace.
 

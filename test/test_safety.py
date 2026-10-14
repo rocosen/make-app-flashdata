@@ -32,17 +32,18 @@ class SafetyContract(unittest.TestCase):
         self.assertEqual(p['type'], 'password')
         self.assertNotIn('default', p)
 
-    def test_authenticated_calls_do_not_follow_redirects(self):
+    def test_authenticated_calls_configure_explicit_redirect_controls(self):
         for c in (read('base.json'), read('connections/api-key/communication.json')):
-            self.assertIs(c['followRedirect'], False)
-            self.assertIs(c['followAllRedirect'], False)
             self.assertIn('request.headers.x-api-key', c['log']['sanitize'])
             self.assertIn('x-api-key', c['headers'])
+        connection = read('connections/api-key/communication.json')
+        self.assertIs(connection['followRedirect'], False)
+        self.assertIs(connection['followAllRedirect'], False)
         for p in (APP / 'modules').glob('*/communication.json'):
             data = json.loads(p.read_text())
             for c in data if isinstance(data, list) else [data]:
-                self.assertNotEqual(c.get('followRedirect'), True)
-                self.assertNotEqual(c.get('followAllRedirect'), True)
+                self.assertIs(c.get('followRedirect'), False, str(p))
+                self.assertIs(c.get('followAllRedirect'), False, str(p))
                 self.assertNotIn('repeat', c)
 
     def test_paid_errors_keep_service_details_without_retry_type(self):
@@ -95,7 +96,7 @@ class SafetyContract(unittest.TestCase):
     def test_universal_rejects_external_urls_and_sensitive_header_overrides(self):
         fields = read('modules/make-an-api-call/expect.json')
         path = next(p for p in fields if p['name'] == 'url')['validate']['pattern']
-        for bad in ['https://evil.example/', '//evil.example/', '/\\evil.example/', '/@evil.example/', '/a?api_key=x', '/%2f%2fevil.example']:
+        for bad in ['https://evil.example/', '//evil.example/', '/\\evil.example/', '/@evil.example/', '/a?api_key=x', '/%2f%2fevil.example', '/v2/jobs/job_test/results', '/v2/bulk-jobs/bulk_test/results/1']:
             self.assertIsNone(re.fullmatch(path, bad), bad)
         self.assertIsNotNone(re.fullmatch(path, '/v2/api-access'))
         key = next(p for p in fields if p['name'] == 'headers')['spec'][0]['validate']['pattern']
@@ -123,11 +124,13 @@ class SafetyContract(unittest.TestCase):
         for name in ['videoQuality', 'audioQuality', 'audioLanguage', 'outputFormat']:
             self.assertNotIn('default', next(p for p in fields if p['name'] == name))
 
-    def test_result_reader_never_forwards_api_key_to_storage(self):
+    def test_result_reader_is_blocked_before_redirect_until_runtime_is_verified(self):
         access, link, content = read('modules/get-job-result/communication.json')
         self.assertEqual(access['url'], 'https://api.flashdata.dev/v2/api-access')
-        self.assertIn("startsWith(body.result_origin, 'https://')", access['response']['valid']['condition'])
-        self.assertIn("startsWith(headers.location, temp.resultOrigin + '/')", link['response']['valid']['condition'])
+        self.assertEqual(access['response']['valid']['condition'], '{{false}}')
+        self.assertIn('temporarily disabled', access['response']['valid']['message'])
+        self.assertIn("substring(headers.location, 0, length(temp.resultOrigin)) === temp.resultOrigin", link['response']['valid']['condition'])
+        self.assertIn("substring(headers.location, length(temp.resultOrigin), length(temp.resultOrigin) + 1) === '/'", link['response']['valid']['condition'])
         self.assertEqual(content['headers'], '{{emptycollection}}')
         self.assertEqual(content['url'], '{{temp.resultUrl}}')
         for c in [access, link, content]:

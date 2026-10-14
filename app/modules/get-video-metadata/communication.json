@@ -18,7 +18,9 @@
     },
     "output": {
       "{{...}}": "{{get(body.results, '1')}}",
-      "uploadDate": "{{get(body.results, '1.uploadDate') ? parseDate(get(body.results, '1.uploadDate'), 'YYYY-MM-DDTHH:mm:ssZ') : null}}"
+      "uploadDate": "{{if(get(body.results, '1.uploadDate'), parseDate(get(body.results, '1.uploadDate'), 'YYYY-MM-DDTHH:mm:ssZ'), null)}}"
     }
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }
