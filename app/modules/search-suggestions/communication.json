@@ -21,5 +21,7 @@
     },
     "iterate": "{{get(body.results, '1')}}",
     "limit": "{{parameters.limit}}"
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }

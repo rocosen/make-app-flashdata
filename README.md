@@ -2,7 +2,9 @@
 
 Native Make integration for 15 Google and YouTube data tasks. Each source has its own module and task blueprint; jobs and universal calls are separate utilities.
 
-The existing app is available through its [invite link](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d). The initial review was requested on 2026-10-10 and the supplementary vendor form was submitted on 2026-10-11. Make posted **Changes required** on 2026-10-11. The requested corrections and 15-capability expansion are saved in the Make editor. Fifteen independent private template drafts exist; public templates remain 0/15. The first template publication attempt failed with “Template uses app which can't be upgraded to compiled app.” App approval and live validation remain outstanding. See the [deployment record](docs/platform-state-2026-10-14.md).
+The existing app is available through its [invite link](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d). The initial review was requested on 2026-10-10 and the supplementary vendor form was submitted on 2026-10-11. Make posted **Changes required** on 2026-10-11. The requested corrections and 15-capability expansion are saved in the Make editor. Fifteen independent private template drafts exist; public templates remain 0/15. The first template publication attempt failed with “Template uses app which can't be upgraded to compiled app.” Fourteen data capabilities now passed live tests; download/storage and result retrieval remain outstanding. App approval is still pending. See the [deployment record](docs/platform-state-2026-10-14.md).
+
+**Current limitation (2026-10-14):** Fourteen data capabilities passed live Make tests. Video download/storage execution remains unverified. Get a job result is temporarily disabled before requesting the signed result link because Make still followed redirects with both documented flags set to false. Keep the job ID and use the FlashData console for stored results; do not resubmit paid work.
 
 ## Task modules
 
@@ -41,13 +43,13 @@ Google searches use Make pagination and request up to 100 results per page. Limi
 
 YouTube Search supports up to 20 results and Extended Search up to 700, with a separate source and price. Neither invents a pagination token. Transcript defaults to automatic captions; Captions defaults to uploader-provided captions. The requested language/track must exist. No automatic fallback, translation or speech recognition is performed.
 
-Download submits an asynchronous job. Get a job status reads that existing job; Get a job result reads its completed JSON manifest. Files go to customer storage, not a public Make attachment. The template reads status once; if still processing, use the [reader blueprint](examples/read-download-job.blueprint.json) later with the same job ID. Do not repeat the submission to poll. Charges settle by delivered bytes; storage privacy, access and retention remain controlled by the storage owner.
+Download submits an asynchronous job. Get a job status reads that existing job; Get a job result is currently guarded and does not retrieve the manifest. Files go to customer storage, not a public Make attachment. The template reads status once; if still processing, check the same job ID later. The [reader blueprint](examples/read-download-job.blueprint.json) currently stops with the result-reader limitation; use the FlashData console for results. Do not repeat the submission to poll. Charges settle by delivered bytes; storage privacy, access and retention remain controlled by the storage owner.
 
 The source named youtube_trainability checks a Creative Commons license label. It does not read YouTube third-party-training settings or grant training rights.
 
 ## Safety and migration
 
-Authentication uses a password connection field, free `GET https://api.flashdata.dev/v2/api-access`, and lowercase-header log masking. HTTP redirects are disabled. The result reader checks the signed URL against the trusted HTTPS result origin and removes all inherited headers before fetching stored JSON. Download storage credentials and signed URLs are excluded from HTTP logs; shared templates contain neither credentials nor saved connection IDs.
+Authentication uses a password connection field, free `GET https://api.flashdata.dev/v2/api-access`, and lowercase-header log masking. Every communication request explicitly configures both redirect flags as false, but live Make result-link requests still reached storage. The reader is therefore guarded before that request. The downstream origin check and empty headers are retained for diagnosis, not claimed as runtime-verified protection; see [the redirect blocker](docs/redirect-blocker.md). Download storage credentials and signed URLs are excluded from HTTP logs; shared templates contain neither credentials nor saved connection IDs.
 
 HTTP errors preserve the status, API message and field detail. `RuntimeError` deliberately avoids automatic rate/connection retry selection for paid POSTs. A 429 can be an uncharged admission rejection; this does not authorize an automatic retry. Platform/network recovery and scenario error handlers remain outside these definitions. Inspect Jobs after an uncertain submission before rerunning it.
 
@@ -55,4 +57,4 @@ Outputs now expose result fields directly: map `title` instead of `result.title`
 
 ## Development and verification
 
-See [deployment](docs/development.md), [historical platform validation](docs/validation.md), and [task templates](examples/README.md). Run `python3 -m unittest discover -s test -v` for offline artifact safety checks. These checks do not execute Make IML or establish that the new modules or public templates are deployed and working.
+See [deployment](docs/development.md), [platform validation](docs/validation.md), and [task templates](examples/README.md). Run `python3 -m unittest discover -s test -v` for offline artifact safety checks. These checks do not execute Make IML or establish that the new modules or public templates are deployed and working.

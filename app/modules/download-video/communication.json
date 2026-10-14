@@ -27,7 +27,7 @@
     },
     "output": {
       "{{...}}": "{{body}}",
-      "created_at": "{{body.created_at ? parseDate(body.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}"
+      "created_at": "{{if(body.created_at, parseDate(body.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ'), null)}}"
     }
   },
   "log": {
@@ -35,5 +35,7 @@
       "request.headers.x-api-key",
       "request.body.params.storage"
     ]
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }

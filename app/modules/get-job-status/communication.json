@@ -9,8 +9,10 @@
     },
     "output": {
       "{{...}}": "{{body.job}}",
-      "createdAt": "{{body.job.createdAt ? parseDate(body.job.createdAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}",
-      "updatedAt": "{{body.job.updatedAt ? parseDate(body.job.updatedAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}"
+      "createdAt": "{{if(body.job.createdAt, parseDate(body.job.createdAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ'), null)}}",
+      "updatedAt": "{{if(body.job.updatedAt, parseDate(body.job.updatedAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ'), null)}}"
     }
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }

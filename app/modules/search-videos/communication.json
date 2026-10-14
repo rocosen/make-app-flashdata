@@ -18,9 +18,11 @@
     },
     "output": {
       "{{...}}": "{{item}}",
-      "uploadDate": "{{item.uploadDate ? parseDate(item.uploadDate, 'YYYY-MM-DDTHH:mm:ssZ') : null}}"
+      "uploadDate": "{{if(item.uploadDate, parseDate(item.uploadDate, 'YYYY-MM-DDTHH:mm:ssZ'), null)}}"
     },
     "iterate": "{{get(body.results, '1.results')}}",
     "limit": "{{parameters.limit}}"
-  }
+  },
+  "followRedirect": false,
+  "followAllRedirect": false
 }

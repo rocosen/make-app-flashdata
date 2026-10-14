@@ -1,7 +1,7 @@
 {
   "name": "getJobResult",
   "label": "Get a job result",
-  "description": "Retrieves the completed JSON result of an existing FlashData job. For downloads, the result describes files in customer storage. Does not submit a query.",
+  "description": "Temporarily unavailable while HTTP redirect handling is verified. Stops before requesting a result link. Keep the job ID and view its result in the FlashData console; do not resubmit paid work.",
   "type": "action",
   "connection": "apiKey",
   "group": "Jobs",

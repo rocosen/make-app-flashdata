@@ -1,7 +1,7 @@
 {
   "name": "getJobStatus",
   "label": "Get a job status",
-  "description": "Retrieves status and usage for an existing FlashData job without submitting a paid query. After completion, use Get a job result.",
+  "description": "Retrieves status and usage for an existing FlashData job without submitting a paid query. View completed results in the FlashData console while the Make result reader is unavailable.",
   "type": "action",
   "connection": "apiKey",
   "group": "Jobs",

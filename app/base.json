@@ -4,8 +4,6 @@
     "x-api-key": "{{connection.apiKey}}",
     "Accept": "application/json"
   },
-  "followRedirect": false,
-  "followAllRedirect": false,
   "response": {
     "error": {
       "type": "RuntimeError",

@@ -5,9 +5,9 @@
     "label": "URL",
     "required": true,
     "validate": {
-      "pattern": "^/[A-Za-z0-9][A-Za-z0-9/_.-]*$"
+      "pattern": "^(?!.*[/]results(?:[/]|$))/[A-Za-z0-9][A-Za-z0-9/_.-]*$"
     },
-    "help": "Enter a relative path. With Management API, /v2/api-access verifies access without charging FlashData query credits. Data API uses data.flashdata.dev; Management API uses api.flashdata.dev. Redirects are not followed; use Get a job result for stored output."
+    "help": "Enter a relative path. With Management API, /v2/api-access verifies access without charging FlashData query credits. Data API uses data.flashdata.dev; Management API uses api.flashdata.dev. Result endpoints are temporarily blocked while Make redirect handling is verified; use the FlashData console for stored output."
   },
   {
     "name": "api",

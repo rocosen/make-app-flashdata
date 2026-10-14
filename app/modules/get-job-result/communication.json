@@ -4,21 +4,23 @@
     "method": "GET",
     "response": {
       "valid": {
-        "condition": "{{statusCode === 200 && startsWith(body.result_origin, 'https://')}}",
+        "condition": "{{false}}",
         "type": "RuntimeError",
-        "message": "FlashData did not provide a trusted HTTPS result origin."
+        "message": "Result retrieval is temporarily disabled while Make HTTP redirect handling is verified. Do not resubmit the paid query. Keep the job ID and read its status or use the FlashData console."
       },
       "temp": {
         "resultOrigin": "{{body.result_origin}}"
       }
-    }
+    },
+    "followRedirect": false,
+    "followAllRedirect": false
   },
   {
     "url": "https://api.flashdata.dev/v2/jobs/{{parameters.jobId}}/results",
     "method": "GET",
     "response": {
       "valid": {
-        "condition": "{{statusCode === 302 && startsWith(headers.location, temp.resultOrigin + '/')}}",
+        "condition": "{{statusCode === 302 && substring(headers.location, 0, length(temp.resultOrigin)) === temp.resultOrigin && substring(headers.location, length(temp.resultOrigin), length(temp.resultOrigin) + 1) === '/'}}",
         "type": "RuntimeError",
         "message": "The job result is not ready or its link is outside the trusted origin. Check job status; do not resubmit the query."
       },
@@ -31,7 +33,9 @@
         "request.headers.x-api-key",
         "response.headers.location"
       ]
-    }
+    },
+    "followRedirect": false,
+    "followAllRedirect": false
   },
   {
     "url": "{{temp.resultUrl}}",
@@ -49,6 +53,8 @@
       "sanitize": [
         "request.url"
       ]
-    }
+    },
+    "followRedirect": false,
+    "followAllRedirect": false
   }
 ]
