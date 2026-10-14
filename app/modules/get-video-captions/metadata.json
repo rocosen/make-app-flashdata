@@ -1,0 +1,9 @@
+{
+  "name": "getVideoCaptions",
+  "label": "Get video captions",
+  "description": "Retrieves YouTube captions with uploader-provided captions selected by default. Returns timestamped segments and full text. Consumes FlashData credits.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "read"
+}

@@ -1,0 +1,81 @@
+{
+  "name": "Get a YouTube transcript with timestamps",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:getVideoTranscript",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "videoId": "dQw4w9WgXcQ",
+        "language": "en",
+        "auto": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "videoId",
+            "type": "text",
+            "label": "Video ID",
+            "required": true,
+            "validate": {
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            },
+            "help": "Enter the 11-character YouTube video ID, not the full URL."
+          },
+          {
+            "name": "language",
+            "type": "text",
+            "label": "Language",
+            "required": true,
+            "default": "en",
+            "validate": {
+              "pattern": "^[A-Za-z0-9-]{1,35}$"
+            }
+          },
+          {
+            "name": "auto",
+            "type": "boolean",
+            "label": "Automatically generated captions",
+            "required": true,
+            "default": true,
+            "help": "Yes selects automatic captions; No selects uploader-provided captions. The exact language and source must exist. No fallback, transcription or translation is performed."
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

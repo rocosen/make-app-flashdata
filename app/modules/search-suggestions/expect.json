@@ -1,0 +1,43 @@
+[
+  {
+    "name": "query",
+    "type": "text",
+    "label": "Query",
+    "validate": {
+      "min": 1,
+      "max": 2000
+    },
+    "required": true
+  },
+  {
+    "name": "language",
+    "type": "text",
+    "label": "Language",
+    "required": true,
+    "default": "en",
+    "validate": {
+      "pattern": "^[A-Za-z0-9-]{1,35}$"
+    }
+  },
+  {
+    "name": "region",
+    "type": "text",
+    "label": "Region",
+    "required": true,
+    "default": "US",
+    "validate": {
+      "pattern": "^[A-Za-z]{2}$"
+    }
+  },
+  {
+    "name": "limit",
+    "type": "uinteger",
+    "label": "Limit",
+    "validate": {
+      "min": 1,
+      "max": 100
+    },
+    "default": 10,
+    "help": "Number of suggestions to return. Fewer may be available."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Title"
+  },
+  {
+    "name": "imageUrl",
+    "type": "url",
+    "label": "Image URL"
+  },
+  {
+    "name": "imageWidth",
+    "type": "uinteger",
+    "label": "Image width"
+  },
+  {
+    "name": "imageHeight",
+    "type": "uinteger",
+    "label": "Image height"
+  },
+  {
+    "name": "thumbnailUrl",
+    "type": "url",
+    "label": "Thumbnail URL"
+  },
+  {
+    "name": "thumbnailWidth",
+    "type": "uinteger",
+    "label": "Thumbnail width"
+  },
+  {
+    "name": "thumbnailHeight",
+    "type": "uinteger",
+    "label": "Thumbnail height"
+  },
+  {
+    "name": "link",
+    "type": "url",
+    "label": "Source page"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Source"
+  },
+  {
+    "name": "domain",
+    "type": "text",
+    "label": "Domain"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
+  },
+  {
+    "name": "googleUrl",
+    "type": "url",
+    "label": "Google URL"
+  }
+]

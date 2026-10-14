@@ -2,9 +2,9 @@
   {
     "name": "apiKey",
     "type": "password",
-    "label": "API Key",
+    "label": "API key",
     "required": true,
     "editable": true,
-    "help": "Create an API key in your FlashData console. Connection verification does not consume query credits."
+    "help": "Create a key at https://flashdata.dev/app/api-keys and grant the sources you use. API calls are paid; connection verification consumes no FlashData query credits. Make charges separately."
   }
 ]

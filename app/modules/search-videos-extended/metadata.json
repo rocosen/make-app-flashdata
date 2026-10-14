@@ -1,0 +1,8 @@
+{
+  "name": "searchVideosExtended",
+  "label": "Search videos (extended)",
+  "description": "Searches YouTube and returns up to 700 results per request. Uses the separately priced Extended Search API.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "YouTube"
+}

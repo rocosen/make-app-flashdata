@@ -1,0 +1,8 @@
+{
+  "name": "searchImages",
+  "label": "Search images",
+  "description": "Searches Google Images for image URLs, dimensions, thumbnails and source pages. Each page consumes FlashData credits.",
+  "type": "search",
+  "connection": "apiKey",
+  "group": "Google search"
+}

@@ -1,7 +1,7 @@
 {
   "name": "flashdata",
   "label": "FlashData",
-  "description": "Search the web and retrieve video metadata and transcripts through the FlashData API.",
+  "description": "Search Google results and retrieve YouTube search, metadata, transcripts, captions, channel and license data, or submit media delivery jobs with FlashData.",
   "theme": "#367444",
   "language": "en",
   "version": "1.0.0"

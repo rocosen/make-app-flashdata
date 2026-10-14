@@ -1,7 +1,9 @@
 {
   "name": "getVideoTranscript",
-  "label": "Get Video Transcript",
-  "description": "Retrieve YouTube video subtitles through FlashData without changing the requested language or subtitle type. Consumes FlashData credits.",
+  "label": "Get a video transcript",
+  "description": "Retrieves YouTube transcripts with automatic captions selected by default. Returns timestamped segments and full text. Consumes FlashData credits.",
   "type": "action",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "read"
 }

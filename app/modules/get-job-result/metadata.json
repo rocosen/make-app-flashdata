@@ -1,0 +1,9 @@
+{
+  "name": "getJobResult",
+  "label": "Get a job result",
+  "description": "Retrieves the completed JSON result of an existing FlashData job. For downloads, the result describes files in customer storage. Does not submit a query.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "Jobs",
+  "action": "read"
+}

@@ -1,0 +1,39 @@
+{
+  "url": "/v1/queries",
+  "method": "POST",
+  "type": "json",
+  "body": {
+    "source": "youtube_download",
+    "video_id": "{{parameters.videoId}}",
+    "params": {
+      "download_type": "{{parameters.downloadType}}",
+      "storage": "{{parameters.storage}}",
+      "video_quality": "{{parameters.videoQuality}}",
+      "fps": "{{parameters.fps}}",
+      "audio_language": "{{parameters.audioLanguage}}",
+      "audio_quality": "{{parameters.audioQuality}}",
+      "output_format": "{{parameters.outputFormat}}",
+      "yt_dlp_format": "{{parameters.ytDlpFormat}}",
+      "upload_metadata": "{{parameters.uploadMetadata}}",
+      "start_at": "{{parameters.startAt}}",
+      "end_at": "{{parameters.endAt}}"
+    }
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode >= 200 && statusCode < 300 && !body.error && body.id}}",
+      "type": "RuntimeError",
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}} Check Jobs before repeating an uncertain submission."
+    },
+    "output": {
+      "{{...}}": "{{body}}",
+      "created_at": "{{body.created_at ? parseDate(body.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.x-api-key",
+      "request.body.params.storage"
+    ]
+  }
+}

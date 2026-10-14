@@ -1,0 +1,12 @@
+[
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID",
+    "required": true,
+    "validate": {
+      "pattern": "^[A-Za-z0-9_-]{11}$"
+    },
+    "help": "Enter the 11-character YouTube video ID, not the full URL."
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Headline"
+  },
+  {
+    "name": "link",
+    "type": "url",
+    "label": "Article URL"
+  },
+  {
+    "name": "snippet",
+    "type": "text",
+    "label": "Excerpt"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Publication"
+  },
+  {
+    "name": "date",
+    "type": "text",
+    "label": "Publication date (source text)"
+  },
+  {
+    "name": "imageUrl",
+    "type": "url",
+    "label": "Image URL"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
+  }
+]

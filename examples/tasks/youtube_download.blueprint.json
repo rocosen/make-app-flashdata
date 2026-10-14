@@ -1,0 +1,695 @@
+{
+  "name": "Deliver YouTube video or audio to your cloud storage",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:downloadVideo",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "videoId": "jNQXAC9IVRw",
+        "downloadType": "audio_video",
+        "uploadMetadata": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "videoId",
+            "type": "text",
+            "label": "Video ID",
+            "required": true,
+            "validate": {
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            },
+            "help": "Enter the 11-character YouTube video ID, not the full URL."
+          },
+          {
+            "name": "downloadType",
+            "type": "select",
+            "label": "Download type",
+            "options": [
+              {
+                "label": "audio_video",
+                "value": "audio_video"
+              },
+              {
+                "label": "video",
+                "value": "video"
+              },
+              {
+                "label": "audio",
+                "value": "audio"
+              }
+            ],
+            "required": true,
+            "default": "audio_video"
+          },
+          {
+            "name": "storage",
+            "type": "collection",
+            "label": "Customer storage",
+            "required": true,
+            "spec": [
+              {
+                "name": "storage_type",
+                "type": "select",
+                "label": "Storage provider",
+                "options": [
+                  {
+                    "label": "azure",
+                    "value": "azure",
+                    "nested": [
+                      {
+                        "name": "account_name",
+                        "type": "text",
+                        "label": "Azure account name",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      },
+                      {
+                        "name": "sas_token",
+                        "type": "password",
+                        "label": "Azure SAS token",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "bos",
+                    "value": "bos",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "cos",
+                    "value": "cos",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "gcs",
+                    "value": "gcs",
+                    "nested": [
+                      {
+                        "name": "service_account",
+                        "type": "collection",
+                        "label": "GCS service account",
+                        "spec": [
+                          {
+                            "name": "project_id",
+                            "type": "text",
+                            "label": "Project ID",
+                            "validate": {
+                              "min": 1,
+                              "max": 200
+                            },
+                            "required": true
+                          },
+                          {
+                            "name": "client_email",
+                            "type": "text",
+                            "label": "Client email",
+                            "validate": {
+                              "min": 1,
+                              "max": 320
+                            },
+                            "required": true
+                          },
+                          {
+                            "name": "private_key",
+                            "type": "password",
+                            "label": "Private key",
+                            "required": true
+                          }
+                        ],
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "oss",
+                    "value": "oss",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      },
+                      {
+                        "name": "endpoint_url",
+                        "type": "url",
+                        "label": "Endpoint URL",
+                        "help": "Public HTTPS S3-compatible or OSS endpoint.",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "s3",
+                    "value": "s3",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      },
+                      {
+                        "name": "endpoint_url",
+                        "type": "url",
+                        "label": "Endpoint URL",
+                        "help": "Public HTTPS S3-compatible or OSS endpoint.",
+                        "required": false
+                      }
+                    ]
+                  },
+                  {
+                    "label": "s3_compatible",
+                    "value": "s3_compatible",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      },
+                      {
+                        "name": "endpoint_url",
+                        "type": "url",
+                        "label": "Endpoint URL",
+                        "help": "Public HTTPS S3-compatible or OSS endpoint.",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tos",
+                    "value": "tos",
+                    "nested": [
+                      {
+                        "name": "access_key",
+                        "type": "password",
+                        "label": "Access key",
+                        "required": true
+                      },
+                      {
+                        "name": "secret_key",
+                        "type": "password",
+                        "label": "Secret key",
+                        "required": true
+                      },
+                      {
+                        "name": "region",
+                        "type": "text",
+                        "label": "Storage region",
+                        "validate": {
+                          "min": 1,
+                          "max": 100
+                        },
+                        "required": true
+                      }
+                    ]
+                  }
+                ],
+                "required": true,
+                "mappable": false
+              },
+              {
+                "name": "storage_url",
+                "type": "text",
+                "label": "Bucket or container",
+                "validate": {
+                  "min": 1,
+                  "max": 1024
+                },
+                "required": true
+              },
+              {
+                "name": "object_prefix",
+                "type": "text",
+                "label": "Object prefix",
+                "validate": {
+                  "min": 1,
+                  "max": 512
+                },
+                "help": "Example archive/YYYYMMDD. Use a prefix, not part of the bucket name."
+              }
+            ],
+            "help": "Your writable destination is required. Storage credentials are sent to FlashData to deliver this job. Never put them in public templates. Storage provider charges are separate."
+          },
+          {
+            "name": "videoQuality",
+            "type": "select",
+            "label": "Video quality",
+            "options": [
+              {
+                "label": "best",
+                "value": "best"
+              },
+              {
+                "label": "worst",
+                "value": "worst"
+              },
+              {
+                "label": "<=144",
+                "value": "<=144"
+              },
+              {
+                "label": "==144",
+                "value": "==144"
+              },
+              {
+                "label": ">=144",
+                "value": ">=144"
+              },
+              {
+                "label": "<=360",
+                "value": "<=360"
+              },
+              {
+                "label": "==360",
+                "value": "==360"
+              },
+              {
+                "label": ">=360",
+                "value": ">=360"
+              },
+              {
+                "label": "<=480",
+                "value": "<=480"
+              },
+              {
+                "label": "==480",
+                "value": "==480"
+              },
+              {
+                "label": ">=480",
+                "value": ">=480"
+              },
+              {
+                "label": "<=720",
+                "value": "<=720"
+              },
+              {
+                "label": "==720",
+                "value": "==720"
+              },
+              {
+                "label": ">=720",
+                "value": ">=720"
+              },
+              {
+                "label": "<=1080",
+                "value": "<=1080"
+              },
+              {
+                "label": "==1080",
+                "value": "==1080"
+              },
+              {
+                "label": ">=1080",
+                "value": ">=1080"
+              },
+              {
+                "label": "<=1440",
+                "value": "<=1440"
+              },
+              {
+                "label": "==1440",
+                "value": "==1440"
+              },
+              {
+                "label": ">=1440",
+                "value": ">=1440"
+              },
+              {
+                "label": "<=2160",
+                "value": "<=2160"
+              },
+              {
+                "label": "==2160",
+                "value": "==2160"
+              },
+              {
+                "label": ">=2160",
+                "value": ">=2160"
+              },
+              {
+                "label": "<=4320",
+                "value": "<=4320"
+              },
+              {
+                "label": "==4320",
+                "value": "==4320"
+              },
+              {
+                "label": ">=4320",
+                "value": ">=4320"
+              }
+            ],
+            "advanced": true,
+            "help": "Video only; leave empty for audio. The API uses <=720 for video when omitted."
+          },
+          {
+            "name": "fps",
+            "type": "text",
+            "label": "Frame rate constraint",
+            "validate": {
+              "pattern": "^(>=|<=|==)([1-9][0-9]?|1[0-9][0-9]|2[0-3][0-9]|240)$"
+            },
+            "advanced": true
+          },
+          {
+            "name": "audioLanguage",
+            "type": "select",
+            "label": "Audio language",
+            "options": [
+              {
+                "label": "default",
+                "value": "default"
+              },
+              {
+                "label": "original",
+                "value": "original"
+              }
+            ],
+            "advanced": true,
+            "help": "Audio or combined output only; leave empty for video-only. Defaults to the original service choice."
+          },
+          {
+            "name": "audioQuality",
+            "type": "select",
+            "label": "Audio bitrate",
+            "options": [
+              {
+                "label": "best",
+                "value": "best"
+              },
+              {
+                "label": "320",
+                "value": "320"
+              },
+              {
+                "label": "256",
+                "value": "256"
+              },
+              {
+                "label": "192",
+                "value": "192"
+              },
+              {
+                "label": "128",
+                "value": "128"
+              }
+            ],
+            "advanced": true,
+            "help": "Audio-only downloads; values are strings in kbps."
+          },
+          {
+            "name": "outputFormat",
+            "type": "select",
+            "label": "Output format",
+            "options": [
+              {
+                "label": "mp4",
+                "value": "mp4"
+              },
+              {
+                "label": "webm",
+                "value": "webm"
+              },
+              {
+                "label": "mkv",
+                "value": "mkv"
+              },
+              {
+                "label": "m4a",
+                "value": "m4a"
+              },
+              {
+                "label": "mp3",
+                "value": "mp3"
+              },
+              {
+                "label": "opus",
+                "value": "opus"
+              }
+            ],
+            "advanced": true,
+            "help": "Video: mp4/webm/mkv. Audio: m4a/mp3/opus. Omit for the API default."
+          },
+          {
+            "name": "ytDlpFormat",
+            "type": "text",
+            "label": "Advanced format selector",
+            "validate": {
+              "min": 1,
+              "max": 1024
+            },
+            "advanced": true,
+            "help": "Overrides video quality, FPS and audio language; clipping and output format still apply."
+          },
+          {
+            "name": "uploadMetadata",
+            "type": "boolean",
+            "label": "Upload metadata",
+            "required": true,
+            "default": false,
+            "advanced": true
+          },
+          {
+            "name": "startAt",
+            "type": "text",
+            "label": "Clip start",
+            "validate": {
+              "pattern": "^[0-9]{1,2}:[0-5][0-9]:[0-5][0-9]$"
+            },
+            "advanced": true,
+            "help": "HH:MM:SS, no later than 12:00:00."
+          },
+          {
+            "name": "endAt",
+            "type": "text",
+            "label": "Clip end",
+            "validate": {
+              "pattern": "^[0-9]{1,2}:[0-5][0-9]:[0-5][0-9]$"
+            },
+            "advanced": true,
+            "help": "Must be later than the start and no later than 12:00:00."
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "app#flashdata-g6iv9y:getJobStatus",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "jobId": "{{1.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "jobId",
+            "type": "text",
+            "label": "Job ID",
+            "required": true,
+            "validate": {
+              "pattern": "^job_[A-Za-z0-9_-]{1,116}$"
+            },
+            "help": "Use the ID from the original submission. Reading does not submit a new query."
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "module": "app#flashdata-g6iv9y:getJobResult",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "jobId": "{{1.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "jobId",
+            "type": "text",
+            "label": "Job ID",
+            "required": true,
+            "validate": {
+              "pattern": "^job_[A-Za-z0-9_-]{1,116}$"
+            },
+            "help": "Use the ID from the original submission. Reading does not submit a new query."
+          }
+        ]
+      },
+      "filter": {
+        "name": "Read only completed jobs",
+        "conditions": [
+          [
+            {
+              "a": "{{2.status}}",
+              "b": "completed",
+              "o": "text:equal"
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": true,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

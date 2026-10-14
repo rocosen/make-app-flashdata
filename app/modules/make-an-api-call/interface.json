@@ -13,6 +13,6 @@
   {
     "name": "statusCode",
     "type": "number",
-    "label": "Status Code"
+    "label": "Status code"
   }
 ]

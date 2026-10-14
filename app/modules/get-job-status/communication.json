@@ -1,0 +1,16 @@
+{
+  "url": "https://api.flashdata.dev/v2/jobs/{{parameters.jobId}}",
+  "method": "GET",
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200 && body.job}}",
+      "type": "RuntimeError",
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}}"
+    },
+    "output": {
+      "{{...}}": "{{body.job}}",
+      "createdAt": "{{body.job.createdAt ? parseDate(body.job.createdAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}",
+      "updatedAt": "{{body.job.updatedAt ? parseDate(body.job.updatedAt, 'YYYY-MM-DDTHH:mm:ss.SSSZ') : null}}"
+    }
+  }
+}

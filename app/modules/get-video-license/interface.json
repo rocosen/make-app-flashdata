@@ -1,0 +1,26 @@
+[
+  {
+    "name": "videoId",
+    "type": "text",
+    "label": "Video ID"
+  },
+  {
+    "name": "kind",
+    "type": "text",
+    "label": "Result type"
+  },
+  {
+    "name": "etag",
+    "type": "text",
+    "label": "Response tag"
+  },
+  {
+    "name": "permitted",
+    "type": "array",
+    "label": "License label result",
+    "spec": {
+      "type": "text"
+    },
+    "help": "all indicates a Creative Commons label; none also covers missing metadata. Neither grants training rights."
+  }
+]

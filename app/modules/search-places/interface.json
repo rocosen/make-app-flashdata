@@ -1,0 +1,62 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Business name"
+  },
+  {
+    "name": "address",
+    "type": "text",
+    "label": "Address"
+  },
+  {
+    "name": "latitude",
+    "type": "number",
+    "label": "Latitude"
+  },
+  {
+    "name": "longitude",
+    "type": "number",
+    "label": "Longitude"
+  },
+  {
+    "name": "rating",
+    "type": "number",
+    "label": "Rating"
+  },
+  {
+    "name": "ratingCount",
+    "type": "uinteger",
+    "label": "Rating count"
+  },
+  {
+    "name": "phoneNumber",
+    "type": "text",
+    "label": "Phone number"
+  },
+  {
+    "name": "website",
+    "type": "url",
+    "label": "Website"
+  },
+  {
+    "name": "cid",
+    "type": "text",
+    "label": "Place CID"
+  },
+  {
+    "name": "category",
+    "type": "text",
+    "label": "Category"
+  },
+  {
+    "name": "priceLevel",
+    "type": "text",
+    "label": "Price level"
+  },
+  {
+    "name": "position",
+    "type": "uinteger",
+    "label": "Position"
+  }
+]

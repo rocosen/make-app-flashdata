@@ -4,5 +4,6 @@
   "description": "Performs an arbitrary authorized API call.",
   "type": "universal",
   "connection": "apiKey",
-  "subtype": "rest"
+  "subtype": "rest",
+  "group": "Other"
 }

@@ -1,0 +1,9 @@
+{
+  "name": "getChannel",
+  "label": "Get a channel",
+  "description": "Retrieves a YouTube channel profile and recent videos by handle. Counts and images can be unavailable. Consumes FlashData credits.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "read"
+}

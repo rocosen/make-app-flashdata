@@ -1,0 +1,77 @@
+{
+  "name": "Inspect YouTube video metadata and chapters",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:getVideoMetadata",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "videoId": "jNQXAC9IVRw",
+        "includeChapters": true,
+        "includeFormats": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "videoId",
+            "type": "text",
+            "label": "Video ID",
+            "required": true,
+            "validate": {
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            },
+            "help": "Enter the 11-character YouTube video ID, not the full URL."
+          },
+          {
+            "name": "includeChapters",
+            "type": "boolean",
+            "label": "Include chapters",
+            "required": true,
+            "default": true
+          },
+          {
+            "name": "includeFormats",
+            "type": "boolean",
+            "label": "Include formats",
+            "required": true,
+            "default": false
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

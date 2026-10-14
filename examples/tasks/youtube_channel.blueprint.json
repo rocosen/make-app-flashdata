@@ -1,0 +1,74 @@
+{
+  "name": "Snapshot a YouTube channel and recent videos",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:getChannel",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "handle": "@jawed",
+        "videoLimit": 20
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "handle",
+            "type": "text",
+            "label": "Channel handle",
+            "validate": {
+              "min": 1,
+              "max": 100
+            },
+            "required": true,
+            "help": "For example @jawed. The @ prefix is optional."
+          },
+          {
+            "name": "videoLimit",
+            "type": "uinteger",
+            "label": "Recent video limit",
+            "validate": {
+              "min": 1,
+              "max": 100
+            },
+            "required": true,
+            "default": 20
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

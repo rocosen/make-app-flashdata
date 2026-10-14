@@ -7,7 +7,25 @@
     "validate": {
       "pattern": "^/[A-Za-z0-9][A-Za-z0-9/_.-]*$"
     },
-    "help": "Enter a path relative to https://data.flashdata.dev, for example /v1/queries/realtime. Use Query String for query parameters. Credentials are provided by the connection."
+    "help": "Enter a relative path. With Management API, /v2/api-access verifies access without charging FlashData query credits. Data API uses data.flashdata.dev; Management API uses api.flashdata.dev. Redirects are not followed; use Get a job result for stored output."
+  },
+  {
+    "name": "api",
+    "type": "select",
+    "label": "API domain",
+    "options": [
+      {
+        "label": "data",
+        "value": "data"
+      },
+      {
+        "label": "management",
+        "value": "management"
+      }
+    ],
+    "default": "data",
+    "required": true,
+    "help": "Select the Data API for queries or Management API for existing jobs, balance and access."
   },
   {
     "name": "method",
@@ -39,9 +57,36 @@
     ]
   },
   {
+    "name": "headers",
+    "type": "array",
+    "label": "Headers",
+    "spec": [
+      {
+        "name": "key",
+        "type": "text",
+        "label": "Key",
+        "validate": {
+          "pattern": "^(?!(?:[hH][oO][sS][tT]|[aA][uU][tT][hH][oO][rR][iI][zZ][aA][tT][iI][oO][nN]|[xX]-[aA][pP][iI]-[kK][eE][yY]|[cC][oO][oO][kK][iI][eE]|[pP][rR][oO][xX][yY]-[aA][uU][tT][hH][oO][rR][iI][zZ][aA][tT][iI][oO][nN])$)[A-Za-z0-9-]+$"
+        }
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "label": "Value"
+      }
+    ],
+    "default": [
+      {
+        "key": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "help": "You don't have to add authorization headers; we already did that for you. Host and credential headers cannot be overridden."
+  },
+  {
     "name": "qs",
     "type": "array",
-    "label": "Query String",
+    "label": "Query string",
     "spec": [
       {
         "name": "key",
@@ -57,8 +102,8 @@
   },
   {
     "name": "body",
-    "type": "text",
+    "type": "any",
     "label": "Body",
-    "help": "Raw JSON request body. POST /v1/queries/realtime consumes FlashData credits. Check Jobs before retrying an uncertain request."
+    "help": "Raw JSON request body. Data API query submissions consume FlashData credits. Never publish API keys or customer storage credentials in a shared template."
   }
 ]

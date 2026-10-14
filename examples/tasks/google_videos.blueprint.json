@@ -1,0 +1,135 @@
+{
+  "name": "Discover Google video results across websites",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:searchWebVideos",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "query": "vector database tutorial",
+        "autocorrect": true,
+        "maxPages": 1,
+        "limit": 10
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "query",
+            "type": "text",
+            "label": "Query",
+            "validate": {
+              "min": 1,
+              "max": 2000
+            },
+            "required": true
+          },
+          {
+            "name": "gl",
+            "type": "text",
+            "label": "Country code",
+            "validate": {
+              "pattern": "^[A-Za-z]{2}$"
+            },
+            "advanced": true
+          },
+          {
+            "name": "hl",
+            "type": "text",
+            "label": "Interface language",
+            "validate": {
+              "pattern": "^[A-Za-z0-9-]{1,35}$"
+            },
+            "advanced": true
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "label": "Search location",
+            "validate": {
+              "min": 1,
+              "max": 200
+            },
+            "advanced": true
+          },
+          {
+            "name": "tbs",
+            "type": "text",
+            "label": "Search filters",
+            "validate": {
+              "min": 1,
+              "max": 200
+            },
+            "advanced": true,
+            "help": "For example qdr:d (past day) or qdr:w (past week). Availability depends on this search type."
+          },
+          {
+            "name": "autocorrect",
+            "type": "boolean",
+            "label": "Autocorrect",
+            "required": true,
+            "default": true,
+            "advanced": true
+          },
+          {
+            "name": "maxPages",
+            "type": "uinteger",
+            "label": "Maximum paid pages",
+            "validate": {
+              "min": 1,
+              "max": 20
+            },
+            "required": true,
+            "default": 1,
+            "advanced": true,
+            "help": "Each page is a separate paid query, including an empty last page. Starts at page 1. Raise this cap only if you accept the extra calls. Stops at Limit, an empty page or this cap; Make execution limits also apply."
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit",
+            "validate": {
+              "min": 1,
+              "max": 2000
+            },
+            "default": 10,
+            "help": "Number of results to return. Fewer may be available."
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

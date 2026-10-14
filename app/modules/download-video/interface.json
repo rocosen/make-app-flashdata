@@ -1,0 +1,39 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "label": "Job ID"
+  },
+  {
+    "name": "source",
+    "type": "text",
+    "label": "Source"
+  },
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Status"
+  },
+  {
+    "name": "created_at",
+    "type": "date",
+    "label": "Created at"
+  },
+  {
+    "name": "usage",
+    "type": "collection",
+    "label": "Usage",
+    "spec": [
+      {
+        "name": "credits",
+        "type": "number",
+        "label": "Credits"
+      }
+    ]
+  },
+  {
+    "name": "links",
+    "type": "array",
+    "label": "Job links"
+  }
+]

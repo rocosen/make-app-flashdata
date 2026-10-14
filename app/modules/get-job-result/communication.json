@@ -1,0 +1,54 @@
+[
+  {
+    "url": "https://api.flashdata.dev/v2/api-access",
+    "method": "GET",
+    "response": {
+      "valid": {
+        "condition": "{{statusCode === 200 && startsWith(body.result_origin, 'https://')}}",
+        "type": "RuntimeError",
+        "message": "FlashData did not provide a trusted HTTPS result origin."
+      },
+      "temp": {
+        "resultOrigin": "{{body.result_origin}}"
+      }
+    }
+  },
+  {
+    "url": "https://api.flashdata.dev/v2/jobs/{{parameters.jobId}}/results",
+    "method": "GET",
+    "response": {
+      "valid": {
+        "condition": "{{statusCode === 302 && startsWith(headers.location, temp.resultOrigin + '/')}}",
+        "type": "RuntimeError",
+        "message": "The job result is not ready or its link is outside the trusted origin. Check job status; do not resubmit the query."
+      },
+      "temp": {
+        "resultUrl": "{{headers.location}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.x-api-key",
+        "response.headers.location"
+      ]
+    }
+  },
+  {
+    "url": "{{temp.resultUrl}}",
+    "method": "GET",
+    "headers": "{{emptycollection}}",
+    "response": {
+      "valid": {
+        "condition": "{{statusCode === 200 && body.results}}",
+        "type": "RuntimeError",
+        "message": "The stored job result is unavailable. Retry reading the result; do not resubmit the paid query."
+      },
+      "output": "{{body}}"
+    },
+    "log": {
+      "sanitize": [
+        "request.url"
+      ]
+    }
+  }
+]

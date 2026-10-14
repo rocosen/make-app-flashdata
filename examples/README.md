@@ -1,7 +1,11 @@
-# Manual Make example
+# Task blueprints
 
-`video-tools.blueprint.json` is exported from the tested app scenario and has its saved connection reference removed. Import it into Make, install/access the FlashData app, and select your own FlashData connection on every module. Install the app through its [invite link](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d) first; this file alone does not grant app access.
+`tasks.json` holds 15 task-specific descriptions, 30 natural queries and source deep links. `tasks/` contains one blueprint and guide per source. The 15 platform IDs now identify private team drafts, not public entries. Public URLs remain null because publication is blocked. See the [platform record](../docs/platform-state-2026-10-14.md).
 
-The chain runs metadata, transcript, a universal metadata request, then video search. Each module runs once; search is last so its two bundles cannot multiply paid downstream calls. The universal metadata call is included to demonstrate that module and is redundant for a production workflow. One full test run consumed 4 Make credits and 0.016 FlashData credits on 2026-10-10; actual pricing and results can change.
+Install the [invite app](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d), import a blueprint and select your own connection. Free installation does not include paid FlashData requests or Make credits. No template runs a language model or includes a saved connection or key.
 
-Keep scheduling inactive and use Run once. Use the 11-character video ID, explicit language and subtitle type. Before retrying an uncertain request, check FlashData Jobs.
+Google task blueprints default to one paid page. Search modules are terminal so they do not fan out into paid enrichment calls. Download requires private customer storage, reads status once and only reads the manifest if the job is completed. If pending or processing, use `read-download-job.blueprint.json` later with that job ID; it has no submission module. The source download blueprint omits storage values and sets confidential execution metadata. Make requires a provider and bucket to save its wizard, so the private platform draft uses an S3 example with nonfunctional credential/bucket placeholders. Those private fields are not wizard defaults; users must supply their own destination. The platform draft also has Keep data confidential enabled.
+
+`video-tools.blueprint.json` is the historical four-module review export. It uses old output metadata and costs four query calls. It is preserved for evidence, not the recommended new task entry.
+
+Make template descriptions are limited to 1,500 characters and scenario descriptions to 240. Team templates, published share links, approval requests and inclusion in the public library are separate milestones. See [Make template rules](https://help.make.com/create-and-manage-scenario-templates).

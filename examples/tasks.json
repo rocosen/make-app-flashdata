@@ -1,0 +1,242 @@
+[
+  {
+    "source": "google_search",
+    "title": "Find Google Search results for a research question",
+    "description": "Build a reference list before writing a technical brief. Enter a query such as site:docs.python.org asyncio. Each bundle contains a title, URL, snippet and position; map link and title into your destination after this search.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nCountry, interface language and location change the requested search context. Optional fields can be absent. This searches results; it does not fetch full article text. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_search",
+    "scenarioDescription": "Build a reference list before writing a technical brief. Enter a query such as site:docs.python.org asyncio. Each bundle contains a title, URL, snippet and position; map link and title into your destination after this search.",
+    "queries": [
+      "google search",
+      "google serp"
+    ],
+    "module": "searchWebResults",
+    "blueprint": "examples/tasks/google_search.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_search",
+    "platformId": 17129,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "google_news",
+    "title": "Monitor Google News articles about a topic",
+    "description": "Track reporting about a topic such as renewable energy. The news module returns article headlines, links, publication names and date text. Store the article URL as a deduplication key when adding your own table or digest step.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nDate values can be relative, such as 1 day ago. This retrieves search snippets, not full news articles. Date filters and available results depend on Google. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_news",
+    "scenarioDescription": "Track reporting about a topic such as renewable energy. The news module returns article headlines, links, publication names and date text. Store the article URL as a deduplication key when adding your own table or digest step.",
+    "queries": [
+      "google news",
+      "news search"
+    ],
+    "module": "searchNews",
+    "blueprint": "examples/tasks/google_news.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_news",
+    "platformId": 17130,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "google_images",
+    "title": "Find Google Images with source pages and dimensions",
+    "description": "Find reference images for an editorial research board. Search tokyo skyline and inspect imageUrl, imageWidth, imageHeight, thumbnailUrl and the source-page link. Filter dimensions in your next Make step before storing selected references.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nFinding an image does not grant reuse rights. Review the linked source and license before downloading or publishing it; some size and source fields can be absent. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_images",
+    "scenarioDescription": "Find reference images for an editorial research board. Search tokyo skyline and inspect imageUrl, imageWidth, imageHeight, thumbnailUrl and the source-page link. Filter dimensions in your next Make step before storing selected references.",
+    "queries": [
+      "google images",
+      "image search"
+    ],
+    "module": "searchImages",
+    "blueprint": "examples/tasks/google_images.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_images",
+    "platformId": 17131,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "google_shopping",
+    "title": "Capture Google Shopping product and price results",
+    "description": "Research product listings for a category such as mechanical keyboard. Output bundles expose product title, merchant, formatted price, rating and listing URL. Save query, country and capture time alongside each listing to compare later snapshots.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nPrices are display strings and can include currency symbols. These are search snapshots, not a stock or final-checkout-price guarantee. Merchant, delivery and rating fields may be missing. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_shopping",
+    "scenarioDescription": "Research product titles, merchants, display prices and listing URLs from Google Shopping. Save the query, country and capture time to compare later snapshots.",
+    "queries": [
+      "google shopping",
+      "product search"
+    ],
+    "module": "searchProducts",
+    "blueprint": "examples/tasks/google_shopping.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_shopping",
+    "platformId": 17132,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "google_videos",
+    "title": "Discover Google video results across websites",
+    "description": "Find videos about a technical topic across hosting sites. Search vector database tutorial, then map each title, video-page link, publisher and duration text to a research list. Use the page link to identify the original publisher.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nGoogle Videos covers multiple websites. It does not return transcript text or promise a direct downloadable media URL. Publication dates and durations are source text. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_videos",
+    "scenarioDescription": "Find videos about a technical topic across hosting sites. Search vector database tutorial, then map each title, video-page link, publisher and duration text to a research list. Use the page link to identify the original publisher.",
+    "queries": [
+      "google video search",
+      "video serp"
+    ],
+    "module": "searchWebVideos",
+    "blueprint": "examples/tasks/google_videos.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_videos",
+    "platformId": 17133,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "google_places",
+    "title": "Research Google Places and local business listings",
+    "description": "Build a local-business research list from a phrase such as coffee in san francisco. Each bundle can include name, address, coordinates, ratings, category, website and phone number. Map only fields needed by your business workflow.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nContact fields are optional, and a listing is not a verified lead or permission to contact it. Use query and location consistently when comparing snapshots. Maximum paid pages defaults to 1. Increasing it adds separately charged calls; Limit stops the output once reached.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/google_places",
+    "scenarioDescription": "Build a local-business research list from a phrase such as coffee in san francisco. Each bundle can include name, address, coordinates, ratings, category, website and phone number. Map only fields needed by your business workflow.",
+    "queries": [
+      "google places",
+      "local business search"
+    ],
+    "module": "searchPlaces",
+    "blueprint": "examples/tasks/google_places.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/google_places",
+    "platformId": 17134,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_search",
+    "title": "Find YouTube videos by keyword",
+    "description": "Discover candidate videos for a topic such as python tutorial. Enter a query and a result limit up to 20. Each bundle includes a videoId, title, channel, duration, view count and available thumbnails. Add any paid enrichment step deliberately: it runs for every bundle.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nSearch filters can select upload date, duration, type, sort order or features. Missing dates and counts stay unavailable. One run makes one paid request; there is no page token.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_search",
+    "scenarioDescription": "Find up to 20 YouTube videos for a keyword. Each video becomes a separate bundle with its ID, title, channel and available metadata. Add paid enrichment only for videos you choose.",
+    "queries": [
+      "youtube search",
+      "youtube video search"
+    ],
+    "module": "searchVideos",
+    "blueprint": "examples/tasks/youtube_search.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_search",
+    "platformId": 17135,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_search_extended",
+    "title": "Collect a larger YouTube search result set",
+    "description": "Build a broader video research set when the standard 20-result search is too small. Choose a keyword and limit, up to 700, then process the returned video IDs, titles, channel details and thumbnails as separate bundles.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nThis uses the separate youtube_search_extended source and price. The result cap is not a promise that 700 matches exist. A large response or slow source can reach Make execution limits; start with a smaller batch.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_search_extended",
+    "scenarioDescription": "Build a broader video research set when the standard 20-result search is too small. Choose a keyword and limit, up to 700, then process the returned video IDs, titles, channel details and thumbnails as separate bundles.",
+    "queries": [
+      "youtube extended search",
+      "youtube search 700 results"
+    ],
+    "module": "searchVideosExtended",
+    "blueprint": "examples/tasks/youtube_search_extended.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_search_extended",
+    "platformId": 17136,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_metadata",
+    "title": "Inspect YouTube video metadata and chapters",
+    "description": "Enrich a known video ID without repeating a search. Enter its 11-character ID and select Include chapters or Include formats. One output contains title, description, channel, duration, counts, caption availability and any requested chapters/formats.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nStatistics can be null, and chapters are only returned if available. Formats describe available media; they are not a download delivered to your storage.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_metadata",
+    "scenarioDescription": "Inspect a known YouTube video ID for title, channel, duration, statistics and caption availability. Request chapters or media-format metadata when needed.",
+    "queries": [
+      "youtube metadata",
+      "youtube video chapters"
+    ],
+    "module": "getVideoMetadata",
+    "blueprint": "examples/tasks/youtube_metadata.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_metadata",
+    "platformId": 17137,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_transcript",
+    "title": "Get a YouTube transcript with timestamps",
+    "description": "Retrieve existing automatic captions for a known YouTube video in a chosen language. Map fullText into your own document or analysis step, or use segments with start/end seconds to build timestamped references. The template selects automatic captions explicitly.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nThe language and automatic caption track must exist. FlashData does not run speech recognition, translate text or fall back to uploader captions. Installing this template does not include a language model.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_transcript",
+    "scenarioDescription": "Read an existing automatic YouTube caption track in a chosen language. Use fullText for a document or timestamped segments for references; no speech recognition or translation is performed.",
+    "queries": [
+      "youtube transcript",
+      "youtube subtitles"
+    ],
+    "module": "getVideoTranscript",
+    "blueprint": "examples/tasks/youtube_transcript.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_transcript",
+    "platformId": 17138,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_captions",
+    "title": "Retrieve uploader-provided YouTube captions",
+    "description": "Read a video creator's existing caption track for a chosen language. The template explicitly selects uploader captions, returning languageCode, isAutoGenerated, timestamped segments and fullText. Use segments when exact caption timing matters.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nA missing uploader track returns an error; the workflow does not substitute automatic captions. No transcription or translation is performed. Choose the transcript template when you intend automatic captions.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_captions",
+    "scenarioDescription": "Retrieve an existing uploader-provided YouTube caption track with timestamps. A missing track returns an error; automatic captions are not substituted.",
+    "queries": [
+      "youtube captions",
+      "youtube manual captions"
+    ],
+    "module": "getVideoCaptions",
+    "blueprint": "examples/tasks/youtube_captions.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_captions",
+    "platformId": 17139,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_trainability",
+    "title": "Check YouTube Creative Commons license metadata",
+    "description": "Inspect the license label for a known video before your own rights review. Enter the video ID; the response includes videoId, kind, etag and permitted. A detected Creative Commons label yields [\"all\"]; other or missing metadata yields [\"none\"].\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nThe API source is called youtube_trainability, but this checks license metadata only. It does not report creator third-party-training settings or grant permission to train, download or reuse a video.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_trainability",
+    "scenarioDescription": "Inspect a YouTube video's Creative Commons license label. This checks license metadata only; it does not report third-party-training settings or grant reuse rights.",
+    "queries": [
+      "youtube trainability",
+      "youtube creative commons license metadata"
+    ],
+    "module": "getVideoLicense",
+    "blueprint": "examples/tasks/youtube_trainability.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_trainability",
+    "platformId": 17140,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_channel",
+    "title": "Snapshot a YouTube channel and recent videos",
+    "description": "Retrieve a channel profile by handle, such as @jawed. Choose up to 100 recent videos. One result contains channel identity, description, available subscriber/video counts, avatar/banner links and the recent videos array.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nvideoCount describes the channel; videos contains only the requested recent items. Counts and images can be unavailable. Nested uploadDate values remain ISO text; parse them in Make when doing date arithmetic.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_channel",
+    "scenarioDescription": "Retrieve a channel profile by handle, such as @jawed. Choose up to 100 recent videos. One result contains channel identity, description, available subscriber/video counts, avatar/banner links and the recent videos array.",
+    "queries": [
+      "youtube channel data",
+      "youtube channel videos"
+    ],
+    "module": "getChannel",
+    "blueprint": "examples/tasks/youtube_channel.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_channel",
+    "platformId": 17141,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_suggestions",
+    "title": "Explore YouTube autocomplete suggestions",
+    "description": "Expand a topic seed into suggested search phrases. Enter python, language en and region US. Each bundle contains one suggestion string, ready for your own keyword list. Run the search module separately only for the phrases you choose.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nSuggestions are not search-volume measurements or popularity rankings. A prefix can return no suggestions. No downstream paid searches are connected automatically.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_suggestions",
+    "scenarioDescription": "Expand a topic seed into suggested search phrases. Enter python, language en and region US. Each bundle contains one suggestion string, ready for your own keyword list. Run the search module separately only for the phrases you choose.",
+    "queries": [
+      "youtube autocomplete",
+      "youtube search suggestions"
+    ],
+    "module": "searchSuggestions",
+    "blueprint": "examples/tasks/youtube_suggestions.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_suggestions",
+    "platformId": 17142,
+    "publicUrl": null,
+    "status": "team_draft"
+  },
+  {
+    "source": "youtube_download",
+    "title": "Deliver YouTube video or audio to your cloud storage",
+    "description": "Submit a video ID with your own writable storage destination. Choose video/audio format and optional clip times. The workflow returns a job ID and reads status once. If completed, it reads the JSON manifest containing file_url, file_size and downloaded_bytes.\n\nSetup: install the FlashData app, select your own connection and configure the inputs. Create an API key at https://flashdata.dev/app/api-keys with this source enabled.\n\nThe S3 example contains nonfunctional placeholders. Replace them with your own private storage configuration before running. If processing, keep the job ID and use the companion reader later; do not resubmit. Downloads are charged by delivered bytes. File privacy and retention follow your storage configuration.\n\nTemplates and the integration are free to install. FlashData API requests are paid; Make charges separately. Pricing: https://flashdata.dev/pricing\nAPI and fields: https://flashdata.dev/docs/sources/youtube_download",
+    "scenarioDescription": "Submit one YouTube download to your own storage, read its status once, and retrieve the manifest if completed. Keep the job ID to check later without repeating the paid submission.",
+    "queries": [
+      "youtube download",
+      "youtube to s3"
+    ],
+    "module": "downloadVideo",
+    "blueprint": "examples/tasks/youtube_download.blueprint.json",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_download",
+    "platformId": 17143,
+    "publicUrl": null,
+    "status": "team_draft"
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "name": "Explore YouTube autocomplete suggestions",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:searchSuggestions",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "query": "python",
+        "language": "en",
+        "region": "US",
+        "limit": 10
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "query",
+            "type": "text",
+            "label": "Query",
+            "validate": {
+              "min": 1,
+              "max": 2000
+            },
+            "required": true
+          },
+          {
+            "name": "language",
+            "type": "text",
+            "label": "Language",
+            "required": true,
+            "default": "en",
+            "validate": {
+              "pattern": "^[A-Za-z0-9-]{1,35}$"
+            }
+          },
+          {
+            "name": "region",
+            "type": "text",
+            "label": "Region",
+            "required": true,
+            "default": "US",
+            "validate": {
+              "pattern": "^[A-Za-z]{2}$"
+            }
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit",
+            "validate": {
+              "min": 1,
+              "max": 100
+            },
+            "default": 10,
+            "help": "Number of suggestions to return. Fewer may be available."
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

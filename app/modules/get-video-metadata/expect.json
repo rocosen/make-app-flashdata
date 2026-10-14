@@ -12,14 +12,14 @@
   {
     "name": "includeChapters",
     "type": "boolean",
-    "label": "Include Chapters",
+    "label": "Include chapters",
     "required": true,
     "default": true
   },
   {
     "name": "includeFormats",
     "type": "boolean",
-    "label": "Include Formats",
+    "label": "Include formats",
     "required": true,
     "default": false
   }

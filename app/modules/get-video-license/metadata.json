@@ -1,0 +1,9 @@
+{
+  "name": "getVideoLicense",
+  "label": "Get video license metadata",
+  "description": "Retrieves the YouTube Creative Commons license label check. Does not report third-party training settings or grant training permission. Consumes FlashData credits.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "read"
+}

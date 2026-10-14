@@ -14,13 +14,11 @@
     "valid": {
       "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && (!body.job || body.job.status !== 'failed') && body.results}}",
       "type": "RuntimeError",
-      "message": "FlashData query outcome is unknown and may already be charged. Check Jobs in the FlashData console before submitting again."
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}} For an uncertain query, inspect Jobs before submitting again."
     },
     "output": {
-      "result": "{{get(body.results, '1')}}",
-      "source": "{{body.source}}",
-      "usage": "{{body.usage}}",
-      "raw": "{{body}}"
+      "{{...}}": "{{get(body.results, '1')}}",
+      "uploadDate": "{{get(body.results, '1.uploadDate') ? parseDate(get(body.results, '1.uploadDate'), 'YYYY-MM-DDTHH:mm:ssZ') : null}}"
     }
   }
 }

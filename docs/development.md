@@ -2,6 +2,10 @@
 
 This source uses Make's native declarative custom-app format. No external runtime, CLI, MCP server or npm package is required to run it on Make.
 
+## Current review work
+
+Make posted Changes required on 2026-10-11. This expansion must use the same app and original review. The 18 modules and 15 private task-template drafts are now saved separately in the editor; see [actual platform state](platform-state-2026-10-14.md). Creating source alone does not create platform objects. Complete the [review checklist](review-update.md), and record each saved component and template ID. Preserve source before modifying the live editor because unapproved-app changes take effect immediately. Do not run paid queries or storage writes beyond the agreed test budget.
+
 ## Published app
 
 The development app was created on 2026-10-10 (Asia/Singapore) with internal identifier `flashdata-g6iv9y`, version `1.0.0`, region US2. This identifier is assigned by Make; it differs from the requested name `flashdata`. The app was published on 2026-10-10 for [invite-link installation](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d); technical review was requested on the same date and the platform shows `pending approval`. Official approval and directory listing are separate.

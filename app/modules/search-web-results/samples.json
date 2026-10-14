@@ -1,13 +1,5 @@
 {
-  "result": {
-    "title": "Example web result",
-    "link": "https://example.com/",
-    "snippet": "Example only.",
-    "position": 1
-  },
-  "source": "google_search",
-  "usage": {
-    "credits": 0.008
-  },
-  "raw": {}
+  "title": "Illustrative result",
+  "position": 1,
+  "link": "https://example.com/result"
 }

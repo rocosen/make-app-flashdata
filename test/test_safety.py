@@ -1,78 +1,160 @@
-"""Guard credential destinations and paid-query behavior in deployable definitions."""
+"""Check publishable artifacts for credential leaks and unintended paid work.
 
+These offline checks do not execute Make IML or replace platform scenario tests.
+"""
+import copy
 import json
 from pathlib import Path
+import re
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1] / "app"
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / 'app'
+EXPECTED = {'google_search', 'google_news', 'google_images', 'google_shopping',
+            'google_videos', 'google_places', 'youtube_search', 'youtube_search_extended',
+            'youtube_metadata', 'youtube_transcript', 'youtube_captions',
+            'youtube_trainability', 'youtube_channel', 'youtube_suggestions', 'youtube_download'}
 
 
 def read(path):
-    return json.loads((ROOT / path).read_text())
+    return json.loads((APP / path).read_text())
 
 
 class SafetyContract(unittest.TestCase):
-    def test_verification_cannot_charge_a_query(self):
-        connection = read("connections/api-key/communication.json")
-        self.assertEqual(connection["url"], "https://api.flashdata.dev/v2/api-access")
-        self.assertEqual(connection["method"], "GET")
-        self.assertNotIn("body", connection)
-        self.assertNotIn("qs", connection)
+    def test_connection_verifies_without_submitting_work(self):
+        c = read('connections/api-key/communication.json')
+        self.assertEqual(c['url'], 'https://api.flashdata.dev/v2/api-access')
+        self.assertEqual(c['method'], 'GET')
+        self.assertNotIn('body', c)
+        self.assertNotIn('qs', c)
+        self.assertNotIn('metadata', c['response'])
+        p = read('connections/api-key/parameters.json')[0]
+        self.assertEqual(p['type'], 'password')
+        self.assertNotIn('default', p)
 
-    def test_credentials_are_masked_and_never_follow_redirects(self):
-        for config in [read("base.json"), read("connections/api-key/communication.json")]:
-            self.assertIs(config["followRedirect"], False)
-            self.assertIs(config["followAllRedirect"], False)
-            self.assertIn("request.headers.`X-API-Key`", config["log"]["sanitize"])
-        self.assertEqual(read("base.json")["baseUrl"], "https://data.flashdata.dev")
-        parameter = read("connections/api-key/parameters.json")[0]
-        self.assertEqual(parameter["type"], "password")
-        self.assertNotIn("default", parameter)
+    def test_authenticated_calls_do_not_follow_redirects(self):
+        for c in (read('base.json'), read('connections/api-key/communication.json')):
+            self.assertIs(c['followRedirect'], False)
+            self.assertIs(c['followAllRedirect'], False)
+            self.assertIn('request.headers.x-api-key', c['log']['sanitize'])
+            self.assertIn('x-api-key', c['headers'])
+        for p in (APP / 'modules').glob('*/communication.json'):
+            data = json.loads(p.read_text())
+            for c in data if isinstance(data, list) else [data]:
+                self.assertNotEqual(c.get('followRedirect'), True)
+                self.assertNotEqual(c.get('followAllRedirect'), True)
+                self.assertNotIn('repeat', c)
 
-    def test_paid_http_errors_do_not_select_platform_retry_types(self):
-        error = read("base.json")["response"]["error"]
-        self.assertEqual(error["type"], "RuntimeError")
-        for value in error.values():
-            if isinstance(value, dict):
-                self.assertEqual(value["type"], "RuntimeError")
+    def test_paid_errors_keep_service_details_without_retry_type(self):
+        e = read('base.json')['response']['error']
+        self.assertEqual(e['type'], 'RuntimeError')
+        self.assertIn('body.message', e['message'])
+        self.assertIn('body.field', e['message'])
+        for p in (APP / 'modules').glob('*/communication.json'):
+            text = p.read_text()
+            self.assertNotIn('RateLimitError', text)
+            self.assertNotIn('ConnectionError', text)
 
-    def test_paid_query_definitions_have_no_repeat_or_implicit_pagination(self):
-        for file in (ROOT / "modules").glob("*/communication.json"):
-            config = json.loads(file.read_text())
-            self.assertIsInstance(config, dict)
-            self.assertNotIn("repeat", config)
-            self.assertNotIn("pagination", config)
-            if file.parent.name == "make-an-api-call":
+    def test_fifteen_sources_have_distinct_task_scopes(self):
+        cap = read('capabilities.json')
+        self.assertEqual(set(cap), EXPECTED)
+        self.assertEqual(len({v['name'] for v in cap.values()}), 15)
+        for source, spec in cap.items():
+            c = read('modules/' + spec['folder'] + '/communication.json')
+            self.assertEqual(c['body']['source'], source)
+            self.assertEqual(c['method'], 'POST')
+            self.assertEqual(c['url'], '/v1/queries' if source == 'youtube_download' else '/v1/queries/realtime')
+            self.assertNotIn('raw', c['response']['output'])
+
+    def test_pagination_retains_query_and_has_an_explicit_paid_cap(self):
+        for source, spec in read('capabilities.json').items():
+            c = read('modules/' + spec['folder'] + '/communication.json')
+            if not source.startswith('google_'):
+                self.assertNotIn('pagination', c)
                 continue
-            self.assertEqual(config["url"], "/v1/queries/realtime")
-            self.assertEqual(config["method"], "POST")
-            self.assertNotIn("headers", config)
+            first = copy.deepcopy(c['body'])
+            page = copy.deepcopy(c['pagination']['body'])
+            self.assertEqual(first['params'].pop('page'), 1)
+            self.assertEqual(page['params'].pop('page'), '{{pagination.page}}')
+            self.assertEqual(first, page)
+            self.assertEqual(c['pagination']['condition'], '{{pagination.page <= ifempty(parameters.maxPages, 1)}}')
+            fields = read('modules/' + spec['folder'] + '/expect.json')
+            self.assertEqual(next(p for p in fields if p['name'] == 'maxPages')['default'], 1)
+            self.assertEqual(fields[-1]['name'], 'limit')
+            self.assertFalse(fields[-1].get('required', False))
+            self.assertEqual(c['response']['limit'], '{{parameters.limit}}')
 
-    def test_explicit_false_does_not_get_replaced_with_default(self):
-        body = read("modules/search-web-results/communication.json")["body"]
-        self.assertEqual(body["params"]["autocorrect"], "{{parameters.autocorrect}}")
-        self.assertEqual(body["params"]["num"], "{{parameters.limit}}")
-        self.assertEqual(body["params"]["page"], "{{parameters.page}}")
+    def test_explicit_false_and_separate_caption_defaults(self):
+        for folder, default in [('get-video-transcript', True), ('get-video-captions', False)]:
+            c = read('modules/' + folder + '/communication.json')
+            self.assertEqual(c['body']['params']['auto'], '{{parameters.auto}}')
+            self.assertEqual(next(p for p in read('modules/' + folder + '/expect.json') if p['name'] == 'auto')['default'], default)
+        c = read('modules/get-video-metadata/communication.json')
+        self.assertEqual(c['body']['params']['include_formats'], '{{parameters.includeFormats}}')
 
-    def test_universal_cannot_send_key_to_a_user_selected_origin(self):
-        config = read("modules/make-an-api-call/communication.json")
-        self.assertEqual(config["url"], "https://data.flashdata.dev/{{parameters.url}}")
-        parameters = read("modules/make-an-api-call/expect.json")
-        import re
-        pattern = parameters[0]["validate"]["pattern"]
-        for value in ["https://evil.example/", "//evil.example/", "/\\evil.example/", "/@evil.example/"]:
-            self.assertIsNone(re.fullmatch(pattern, value))
-        self.assertIsNotNone(re.fullmatch(pattern, "/v1/queries/realtime"))
-        self.assertFalse(any(p["name"] == "headers" for p in parameters))
+    def test_universal_rejects_external_urls_and_sensitive_header_overrides(self):
+        fields = read('modules/make-an-api-call/expect.json')
+        path = next(p for p in fields if p['name'] == 'url')['validate']['pattern']
+        for bad in ['https://evil.example/', '//evil.example/', '/\\evil.example/', '/@evil.example/', '/a?api_key=x', '/%2f%2fevil.example']:
+            self.assertIsNone(re.fullmatch(path, bad), bad)
+        self.assertIsNotNone(re.fullmatch(path, '/v2/api-access'))
+        key = next(p for p in fields if p['name'] == 'headers')['spec'][0]['validate']['pattern']
+        for bad in ['host', 'HOST', 'Host', 'X-API-KEY', 'x-api-key', 'Authorization', 'Cookie', 'Proxy-Authorization']:
+            self.assertIsNone(re.fullmatch(key, bad), bad)
+        self.assertIsNotNone(re.fullmatch(key, 'Content-Type'))
+        url = read('modules/make-an-api-call/communication.json')['url']
+        self.assertNotIn('{{parameters.api}}', url)
+        self.assertIn("'https://api.flashdata.dev'", url)
+        self.assertIn("'https://data.flashdata.dev'", url)
 
-    def test_video_boolean_inputs_are_forwarded_without_fallback(self):
-        metadata = read("modules/get-video-metadata/communication.json")["body"]["params"]
-        transcript = read("modules/get-video-transcript/communication.json")["body"]["params"]
-        self.assertEqual(metadata["include_formats"], "{{parameters.includeFormats}}")
-        self.assertEqual(metadata["include_chapters"], "{{parameters.includeChapters}}")
-        self.assertEqual(transcript["auto"], "{{parameters.auto}}")
-        self.assertEqual(transcript["language"], "{{parameters.language}}")
+    def test_download_storage_is_private_and_optional_mode_settings_stay_unset(self):
+        c = read('modules/download-video/communication.json')
+        self.assertIn('request.body.params.storage', c['log']['sanitize'])
+        fields = read('modules/download-video/expect.json')
+        storage = next(p for p in fields if p['name'] == 'storage')
+        self.assertTrue(storage['required'])
+        options = next(p for p in storage['spec'] if p['name'] == 'storage_type')['options']
+        for provider in options:
+            for p in provider['nested']:
+                if p['name'] in ['access_key', 'secret_key', 'sas_token']:
+                    self.assertEqual(p['type'], 'password')
+                    self.assertNotIn('default', p)
+            self.assertEqual(any(p['name'] == 'service_account' for p in provider['nested']), provider['value'] == 'gcs')
+        for name in ['videoQuality', 'audioQuality', 'audioLanguage', 'outputFormat']:
+            self.assertNotIn('default', next(p for p in fields if p['name'] == name))
+
+    def test_result_reader_never_forwards_api_key_to_storage(self):
+        access, link, content = read('modules/get-job-result/communication.json')
+        self.assertEqual(access['url'], 'https://api.flashdata.dev/v2/api-access')
+        self.assertIn("startsWith(body.result_origin, 'https://')", access['response']['valid']['condition'])
+        self.assertIn("startsWith(headers.location, temp.resultOrigin + '/')", link['response']['valid']['condition'])
+        self.assertEqual(content['headers'], '{{emptycollection}}')
+        self.assertEqual(content['url'], '{{temp.resultUrl}}')
+        for c in [access, link, content]:
+            self.assertEqual(c['method'], 'GET')
+            self.assertNotIn('body', c)
+        self.assertIn('response.headers.location', link['log']['sanitize'])
+        self.assertIn('request.url', content['log']['sanitize'])
+
+    def test_templates_never_fan_out_into_paid_calls_or_include_credentials(self):
+        tasks = json.loads((ROOT / 'examples/tasks.json').read_text())
+        self.assertEqual({t['source'] for t in tasks}, EXPECTED)
+        self.assertEqual(sum(len(t['queries']) for t in tasks), 30)
+        for t in tasks:
+            self.assertLessEqual(len(t['description']), 1500)
+            self.assertLessEqual(len(t['scenarioDescription']), 240)
+            self.assertEqual(t['documentation'], 'https://flashdata.dev/docs/sources/' + t['source'])
+            bp = json.loads((ROOT / t['blueprint']).read_text())
+            self.assertEqual(bp['flow'][0]['module'], 'app#flashdata-g6iv9y:' + t['module'])
+            for m in bp['flow']:
+                self.assertNotIn('__IMTCONN__', m['parameters'])
+                self.assertNotIn('storage', m['mapper'])
+                self.assertNotIn('apiKey', m['mapper'])
+            self.assertEqual(len(bp['flow']), 3 if t['source'] == 'youtube_download' else 1)
+            if t['source'] == 'youtube_download':
+                self.assertEqual([m['module'].split(':')[1] for m in bp['flow'][1:]], ['getJobStatus', 'getJobResult'])
+                self.assertEqual(bp['flow'][2]['filter']['conditions'][0][0]['b'], 'completed')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

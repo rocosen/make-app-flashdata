@@ -1,0 +1,9 @@
+{
+  "name": "getJobStatus",
+  "label": "Get a job status",
+  "description": "Retrieves status and usage for an existing FlashData job without submitting a paid query. After completion, use Get a job result.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "Jobs",
+  "action": "read"
+}

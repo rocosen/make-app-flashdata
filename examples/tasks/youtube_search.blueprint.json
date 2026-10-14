@@ -1,0 +1,228 @@
+{
+  "name": "Find YouTube videos by keyword",
+  "flow": [
+    {
+      "id": 1,
+      "module": "app#flashdata-g6iv9y:searchVideos",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "query": "python tutorial",
+        "limit": 10
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:app#flashdata-g6iv9y",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "query",
+            "type": "text",
+            "label": "Query",
+            "validate": {
+              "min": 1,
+              "max": 2000
+            },
+            "required": true
+          },
+          {
+            "name": "filters",
+            "type": "collection",
+            "label": "Search filters",
+            "spec": [
+              {
+                "name": "duration",
+                "type": "select",
+                "label": "Duration",
+                "options": [
+                  {
+                    "label": "<4",
+                    "value": "<4"
+                  },
+                  {
+                    "label": "4-20",
+                    "value": "4-20"
+                  },
+                  {
+                    "label": ">20",
+                    "value": ">20"
+                  }
+                ]
+              },
+              {
+                "name": "sort_by",
+                "type": "select",
+                "label": "Sort by",
+                "options": [
+                  {
+                    "label": "rating",
+                    "value": "rating"
+                  },
+                  {
+                    "label": "relevance",
+                    "value": "relevance"
+                  },
+                  {
+                    "label": "view_count",
+                    "value": "view_count"
+                  },
+                  {
+                    "label": "upload_date",
+                    "value": "upload_date"
+                  }
+                ]
+              },
+              {
+                "name": "type",
+                "type": "select",
+                "label": "Result type",
+                "options": [
+                  {
+                    "label": "video",
+                    "value": "video"
+                  },
+                  {
+                    "label": "channel",
+                    "value": "channel"
+                  },
+                  {
+                    "label": "playlist",
+                    "value": "playlist"
+                  },
+                  {
+                    "label": "movie",
+                    "value": "movie"
+                  }
+                ]
+              },
+              {
+                "name": "upload_date",
+                "type": "select",
+                "label": "Upload date",
+                "options": [
+                  {
+                    "label": "today",
+                    "value": "today"
+                  },
+                  {
+                    "label": "last_hour",
+                    "value": "last_hour"
+                  },
+                  {
+                    "label": "this_week",
+                    "value": "this_week"
+                  },
+                  {
+                    "label": "this_month",
+                    "value": "this_month"
+                  },
+                  {
+                    "label": "this_year",
+                    "value": "this_year"
+                  }
+                ]
+              },
+              {
+                "name": "360",
+                "type": "boolean",
+                "label": "360"
+              },
+              {
+                "name": "3d",
+                "type": "boolean",
+                "label": "3d"
+              },
+              {
+                "name": "4k",
+                "type": "boolean",
+                "label": "4k"
+              },
+              {
+                "name": "creative_commons",
+                "type": "boolean",
+                "label": "Creative commons"
+              },
+              {
+                "name": "hd",
+                "type": "boolean",
+                "label": "Hd"
+              },
+              {
+                "name": "hdr",
+                "type": "boolean",
+                "label": "Hdr"
+              },
+              {
+                "name": "live",
+                "type": "boolean",
+                "label": "Live"
+              },
+              {
+                "name": "location",
+                "type": "boolean",
+                "label": "Location"
+              },
+              {
+                "name": "purchased",
+                "type": "boolean",
+                "label": "Purchased"
+              },
+              {
+                "name": "subtitles",
+                "type": "boolean",
+                "label": "Subtitles"
+              },
+              {
+                "name": "vr180",
+                "type": "boolean",
+                "label": "Vr180"
+              }
+            ],
+            "advanced": true
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit",
+            "validate": {
+              "min": 1,
+              "max": 20
+            },
+            "default": 10,
+            "help": "Number of videos to return. Fewer may be available."
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": []
+  }
+}

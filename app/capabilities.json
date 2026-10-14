@@ -1,0 +1,107 @@
+{
+  "google_search": {
+    "folder": "search-web-results",
+    "name": "searchWebResults",
+    "label": "Search web results",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_search"
+  },
+  "google_news": {
+    "folder": "search-news",
+    "name": "searchNews",
+    "label": "Search news",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_news"
+  },
+  "google_images": {
+    "folder": "search-images",
+    "name": "searchImages",
+    "label": "Search images",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_images"
+  },
+  "google_shopping": {
+    "folder": "search-products",
+    "name": "searchProducts",
+    "label": "Search products",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_shopping"
+  },
+  "google_videos": {
+    "folder": "search-web-videos",
+    "name": "searchWebVideos",
+    "label": "Search web videos",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_videos"
+  },
+  "google_places": {
+    "folder": "search-places",
+    "name": "searchPlaces",
+    "label": "Search places",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/google_places"
+  },
+  "youtube_search": {
+    "folder": "search-videos",
+    "name": "searchVideos",
+    "label": "Search videos",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_search"
+  },
+  "youtube_search_extended": {
+    "folder": "search-videos-extended",
+    "name": "searchVideosExtended",
+    "label": "Search videos (extended)",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_search_extended"
+  },
+  "youtube_metadata": {
+    "folder": "get-video-metadata",
+    "name": "getVideoMetadata",
+    "label": "Get video metadata",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_metadata"
+  },
+  "youtube_transcript": {
+    "folder": "get-video-transcript",
+    "name": "getVideoTranscript",
+    "label": "Get a video transcript",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_transcript"
+  },
+  "youtube_captions": {
+    "folder": "get-video-captions",
+    "name": "getVideoCaptions",
+    "label": "Get video captions",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_captions"
+  },
+  "youtube_trainability": {
+    "folder": "get-video-license",
+    "name": "getVideoLicense",
+    "label": "Get video license metadata",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_trainability"
+  },
+  "youtube_channel": {
+    "folder": "get-channel",
+    "name": "getChannel",
+    "label": "Get a channel",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_channel"
+  },
+  "youtube_suggestions": {
+    "folder": "search-suggestions",
+    "name": "searchSuggestions",
+    "label": "Search suggestions",
+    "type": "search",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_suggestions"
+  },
+  "youtube_download": {
+    "folder": "download-video",
+    "name": "downloadVideo",
+    "label": "Download a video",
+    "type": "action",
+    "documentation": "https://flashdata.dev/docs/sources/youtube_download"
+  }
+}

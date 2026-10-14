@@ -1,0 +1,9 @@
+{
+  "name": "downloadVideo",
+  "label": "Download a video",
+  "description": "Submits a YouTube video or audio delivery job to customer storage. Returns a job ID, not a finished file. FlashData charges by delivered bytes; storage costs are separate.",
+  "type": "action",
+  "connection": "apiKey",
+  "group": "YouTube",
+  "action": "create"
+}

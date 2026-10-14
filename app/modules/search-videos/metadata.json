@@ -1,7 +1,8 @@
 {
   "name": "searchVideos",
-  "label": "Search Videos",
-  "description": "Search YouTube videos through FlashData. One execution makes one paid query.",
+  "label": "Search videos",
+  "description": "Searches YouTube and returns up to 20 results per request. Consumes FlashData credits.",
   "type": "search",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "group": "YouTube"
 }

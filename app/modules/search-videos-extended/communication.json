@@ -1,0 +1,26 @@
+{
+  "url": "/v1/queries/realtime",
+  "method": "POST",
+  "type": "json",
+  "body": {
+    "source": "youtube_search_extended",
+    "query": "{{parameters.query}}",
+    "params": {
+      "max_results": "{{ifempty(parameters.limit, 700)}}",
+      "filters": "{{parameters.filters}}"
+    }
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200 && !body.error && (!body.status || body.status === 'done' || body.status === 'completed') && (!body.job || body.job.status !== 'failed') && body.results}}",
+      "type": "RuntimeError",
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.detail, 'FlashData request failed. Check the endpoint, input and account permissions.'))}}{{if(body.field, ' Field: ', '')}}{{ifempty(body.field, '')}} For an uncertain query, inspect Jobs before submitting again."
+    },
+    "output": {
+      "{{...}}": "{{item}}",
+      "uploadDate": "{{item.uploadDate ? parseDate(item.uploadDate, 'YYYY-MM-DDTHH:mm:ssZ') : null}}"
+    },
+    "iterate": "{{get(body.results, '1.results')}}",
+    "limit": "{{parameters.limit}}"
+  }
+}

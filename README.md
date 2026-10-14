@@ -1,48 +1,58 @@
 # FlashData for Make
 
-Native Make custom app source for the [FlashData API](https://flashdata.dev/docs/api-reference).
+Native Make integration for 15 Google and YouTube data tasks. Each source has its own module and task blueprint; jobs and universal calls are separate utilities.
 
-This app is published for installation through an [invite link](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d). Technical review was requested on 2026-10-10; Make shows `pending approval`. It is not yet approved or listed in Make's public catalogue.
+The existing app is available through its [invite link](https://www.make.com/en/hq/app-invitation/22c4a874cb7ddbf30b9f20e0e270477d). The initial review was requested on 2026-10-10 and the supplementary vendor form was submitted on 2026-10-11. Make posted **Changes required** on 2026-10-11. The requested corrections and 15-capability expansion are saved in the Make editor. Fifteen independent private template drafts exist; public templates remain 0/15. The first template publication attempt failed with “Template uses app which can't be upgraded to compiled app.” App approval and live validation remain outstanding. See the [deployment record](docs/platform-state-2026-10-14.md).
 
-## Development layout
+## Task modules
 
-- `app/base.json`: shared API origin, authentication, redirection policy and HTTP error handling.
-- `app/connections/api-key/`: free connection verification and a password-type API key field.
-- `app/modules/`: module metadata, communication, input parameters, output interfaces and illustrative samples.
-- `docs/`: deployment and verified scenario results.
-
-The JSON files map to Make's web app editor tabs. `metadata.json` records values entered in the creation forms; it is not a Make CLI deployment manifest. This repository contains no API keys or platform tokens.
-
-## Modules
-
-| Module | Source | Output |
+| Module | FlashData source | Inputs, outputs and workflow |
 | --- | --- | --- |
-| Search Web Results | `google_search` | One bundle per organic result, including the raw query response and usage |
-| Search Videos | `youtube_search` | One bundle per video |
-| Get Video Metadata | `youtube_metadata` | One bundle with video details |
-| Get Video Transcript | `youtube_transcript` | One bundle with segments and full text |
-| Make an API call | Relative paths on `data.flashdata.dev` | Response body, headers and status code |
+| Search web results | `google_search` | [Task guide](examples/tasks/google_search.md) |
+| Search news | `google_news` | [Task guide](examples/tasks/google_news.md) |
+| Search images | `google_images` | [Task guide](examples/tasks/google_images.md) |
+| Search products | `google_shopping` | [Task guide](examples/tasks/google_shopping.md) |
+| Search web videos | `google_videos` | [Task guide](examples/tasks/google_videos.md) |
+| Search places | `google_places` | [Task guide](examples/tasks/google_places.md) |
+| Search videos | `youtube_search` | [Task guide](examples/tasks/youtube_search.md) |
+| Search videos (extended) | `youtube_search_extended` | [Task guide](examples/tasks/youtube_search_extended.md) |
+| Get video metadata | `youtube_metadata` | [Task guide](examples/tasks/youtube_metadata.md) |
+| Get a video transcript | `youtube_transcript` | [Task guide](examples/tasks/youtube_transcript.md) |
+| Get video captions | `youtube_captions` | [Task guide](examples/tasks/youtube_captions.md) |
+| Get video license metadata | `youtube_trainability` | [Task guide](examples/tasks/youtube_trainability.md) |
+| Get a channel | `youtube_channel` | [Task guide](examples/tasks/youtube_channel.md) |
+| Search suggestions | `youtube_suggestions` | [Task guide](examples/tasks/youtube_suggestions.md) |
+| Download a video | `youtube_download` | [Task guide](examples/tasks/youtube_download.md) |
 
-See [validation results](docs/validation.md) for which modules have been tested on Make. Source implementation and platform verification are separate milestones.
+The app also includes **Get a job status**, **Get a job result**, and **Make an API call**. JSON files map to editor tabs; metadata files are editor form values, not a CLI manifest. Samples are illustrative, not proof of API execution.
 
-## Credentials and query costs
+## Connect and run
 
-Create an API key in the FlashData console and grant it the sources you intend to use. The connection verifies the key with `GET https://api.flashdata.dev/v2/api-access`, which does not consume query credits. Queries use `POST https://data.flashdata.dev/v1/queries/realtime` and consume FlashData credits. Make credits are separate.
+1. Install the app using the invitation above. The public Make catalogue is a separate review milestone.
+2. Create a key at [FlashData API keys](https://flashdata.dev/app/api-keys), granting the sources you use. Select your own connection on every module after importing a task blueprint.
+3. Set the query, video ID or channel handle. Keep scheduling inactive and inspect inputs before Run once. Download workflows also require your private writable storage configuration.
+4. Read the task guide for output fields and limits. Add downstream actions deliberately: search results are separate bundles and can multiply subsequent paid operations.
 
-One search execution requests one page. `Limit` maps to FlashData `params.num`; `Page` maps to `params.page`. Pagination is explicit: changing the page triggers another paid query. There is no request repeat/pagination loop. Video search uses `Limit` as `max_results` and has no page control. A search with no matches is intended to produce zero bundles; a live zero-result case is still pending verification.
+Templates and the integration are free to install. **FlashData API calls are paid.** [FlashData pricing](https://flashdata.dev/pricing), Make credits, and customer-storage charges are separate. Free connection verification and job reads do not spend FlashData query credits; Make can still charge its own credits.
 
-Every output bundle repeats the **same query's** usage and raw response. Do not sum the usage across those bundles. Downstream modules execute once per bundle, so keep paid downstream calls outside an unintended fan-out.
+## Query and download behavior
 
-HTTP error responses use `RuntimeError`, including 429 and 5xx, to avoid Make's default rate/connection retry behavior. Redirects are disabled and API keys are sanitized in request logs. The module does not add a repeat loop. Make's network failure and scenario-level recovery behavior is controlled by the platform: before rerunning an uncertain paid query, inspect FlashData Jobs. Do not enable automatic error-handler retries for paid queries without accepting possible duplicate charges.
+Google searches use Make pagination and request up to 100 results per page. Limit caps emitted bundles; it defaults to 10 and can be cleared. **Maximum paid pages defaults to 1**, bounds requests when Limit is empty or unmet, and must be raised explicitly for more pages. Each page is a paid request, including a possible empty final page. Make execution limits can stop long searches earlier. Result count is not guaranteed.
 
-## Development
+YouTube Search supports up to 20 results and Extended Search up to 700, with a separate source and price. Neither invents a pagination token. Transcript defaults to automatic captions; Captions defaults to uploader-provided captions. The requested language/track must exist. No automatic fallback, translation or speech recognition is performed.
 
-Use the official [Make Custom Apps editor](https://developers.make.com/custom-apps-documentation/create-your-first-app/create-your-app) or the official Make Apps Editor extension. Follow [the deployment guide](docs/development.md); do not paste credentials into Base, Common data, module code or this repository.
+Download submits an asynchronous job. Get a job status reads that existing job; Get a job result reads its completed JSON manifest. Files go to customer storage, not a public Make attachment. The template reads status once; if still processing, use the [reader blueprint](examples/read-download-job.blueprint.json) later with the same job ID. Do not repeat the submission to poll. Charges settle by delivered bytes; storage privacy, access and retention remain controlled by the storage owner.
 
-Run local safety checks with `python3 -m unittest discover -s test -v`. These checks do not substitute for real Make scenario execution.
+The source named youtube_trainability checks a Creative Commons license label. It does not read YouTube third-party-training settings or grant training rights.
 
-## Video inputs and universal calls
+## Safety and migration
 
-Video actions take an 11-character video ID. Metadata preserves the Include Chapters and Include Formats choices. Transcript requires an explicit language and automatic/manual subtitle choice; unavailable subtitles do not trigger a fallback or a second query.
+Authentication uses a password connection field, free `GET https://api.flashdata.dev/v2/api-access`, and lowercase-header log masking. HTTP redirects are disabled. The result reader checks the signed URL against the trusted HTTPS result origin and removes all inherited headers before fetching stored JSON. Download storage credentials and signed URLs are excluded from HTTP logs; shared templates contain neither credentials nor saved connection IDs.
 
-The universal module accepts a relative path such as `/v1/queries/realtime`, a method, query-string items and a JSON text body. It always uses `https://data.flashdata.dev`; authentication and content-type headers are provided by the app. It does not accept arbitrary origins or user-supplied authentication headers. Inspect the returned body for application-level status, as the universal module cannot interpret every endpoint's response contract.
+HTTP errors preserve the status, API message and field detail. `RuntimeError` deliberately avoids automatic rate/connection retry selection for paid POSTs. A 429 can be an uncharged admission rejection; this does not authorize an automatic retry. Platform/network recovery and scenario error handlers remain outside these definitions. Inspect Jobs after an uncertain submission before rerunning it.
+
+Outputs now expose result fields directly: map `title` instead of `result.title`; `raw` and repeated query usage are removed. Google Page is replaced by bounded pagination starting at page 1. Existing manually configured scenarios must review field mappings and pagination settings before rerunning. See [review changes and migration](docs/review-update.md).
+
+## Development and verification
+
+See [deployment](docs/development.md), [historical platform validation](docs/validation.md), and [task templates](examples/README.md). Run `python3 -m unittest discover -s test -v` for offline artifact safety checks. These checks do not execute Make IML or establish that the new modules or public templates are deployed and working.
