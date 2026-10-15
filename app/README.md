@@ -39,6 +39,6 @@ Get a job status reads existing work without creating another paid query. Get a 
 Errors retain the API status and explanation. Paid submissions are not automatically retried by these module definitions. After a timeout, inspect Jobs before running again. Current outputs are direct fields; remap older result.field paths to field and remove uses of raw.
 
 Documentation: https://flashdata.dev/docs/api-reference
-Source and task blueprints: https://github.com/flashdata-dev/make-app-flashdata
+Source and task blueprints: https://github.com/rocosen/make-app-flashdata
 
 This integration does not imply endorsement by Google or YouTube.
